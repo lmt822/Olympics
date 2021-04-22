@@ -2,11 +2,34 @@ const config = require('./db-config.js');
 const mysql = require('mysql');
 
 config.connectionLimit = 10;
-config.connectTimeout = 1000;
-config.acquireTimeout = 60 * 60 * 1000;
+config.connectTimeout = 60000;
+config.acquireTimeout = 60000;
 config.timeout = 60000;
-const connection = mysql.createPool(config);
+console.log('Connecting to rds');
+const connection = mysql.createConnection(config);
+console.log('Connected to rds');
 
+console.log('Top 20 performing atheletes:')
+const query = `
+    WITH winners AS(
+      SELECT Athlete_ID 
+      FROM Participates 
+      WHERE medal = 'Gold'),
+      top AS(
+      SELECT a.ID, COUNT(*)  
+      FROM Athlete a JOIN winners w
+      ON a.ID = w.Athlete_ID
+      GROUP BY a.ID
+      ORDER BY COUNT(*) DESC
+      LIMIT 20)
+    SELECT a.Name 
+    FROM Athlete a
+    JOIN top t ON a.ID = t.ID;
+  `;
+  connection.query(query, (err, rows, fields) => {
+    if (err) console.log(err);
+    else console.log(rows);
+  });
 /* -------------------------------------------------- */
 /* ------------------- Route Handlers --------------- */
 /* -------------------------------------------------- */

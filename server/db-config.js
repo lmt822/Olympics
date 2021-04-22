@@ -5,5 +5,5 @@ module.exports = {
   user: "bigbrain",
   password: "550bigbrain",
   database: "OlympicDB",
-  port: "1251"
+  port: "1521"
 };
