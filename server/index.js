@@ -15,12 +15,12 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 /* ---- (Dashboard) ---- */
 // The route localhost:8081/keywords is registered to the function
-// routes.getTop20Keywords, specified in routes.js.
-app.get('/keywords', routes.getTop20Keywords);
+// routes.getTop10Countries, specified in routes.js.
+app.get('/keywords', routes.getTop10Countries);
 
 
 /* ---- Q1b (Dashboard) ---- */
-app.get('/keywords/:keyword', routes.getTopMoviesWithKeyword);
+app.get('/keywords/:keyword', routes.getTopSportsWithCountry);
 
 
 /* ---- Q2 (Recommendations) ---- */
@@ -28,12 +28,11 @@ app.get('/recommendations/:movieName', routes.getRecs);
 
 
 /* ---- (Best Movies) ---- */
-app.get('/decades', routes.getDecades);
-app.get('/genres', routes.getGenres);
+app.get('/getcountry', routes.getCountries);
 
 
 /* ---- Q3b (Best Movies) ---- */
-app.get('/bestmovies/:decade/:genre', routes.bestMoviesPerDecadeGenre);
+// app.get('/getcountry/:country', routes.getTopSportsWithCountry);
 
 
 app.listen(8081, () => {
