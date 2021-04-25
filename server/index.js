@@ -15,12 +15,20 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 /* ---- (Dashboard) ---- */
 // The route localhost:8081/keywords is registered to the function
+<<<<<<< Updated upstream
 // routes.getTop10Countries, specified in routes.js.
 app.get('/keywords', routes.getTop10Countries);
 
 
 /* ---- Q1b (Dashboard) ---- */
 app.get('/keywords/:keyword', routes.getTopSportsWithCountry);
+=======
+// routes.getTop20Keywords, specified in routes.js.
+app.get('/getTop20Athletes', routes.getTop20Athletes);
+
+
+/* ---- Q1b (Dashboard) ---- */
+>>>>>>> Stashed changes
 
 
 /* ---- Q2 (Recommendations) ---- */

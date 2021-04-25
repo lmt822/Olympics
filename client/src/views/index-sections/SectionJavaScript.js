@@ -64,7 +64,7 @@ function SectionJavaScript() {
                 type="button"
                 onClick={toggleModal}
               >
-                Launch demo modal
+                China
               </Button>
               {/* Modal */}
               <Modal isOpen={modal} toggle={toggleModal}>
