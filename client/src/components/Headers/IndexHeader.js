@@ -23,6 +23,7 @@ import React from "react";
 import { Container } from "reactstrap";
 
 // core components
+import Countdown from "react-countdown";
 
 function IndexHeader() {
   return (
@@ -38,23 +39,13 @@ function IndexHeader() {
         <div className="content-center">
           <Container>
             <div className="title-brand">
-              <h1 className="presentation-title">Tokyo Olympics 2021</h1>
-              <div className="fog-low">
-                <img
-                  alt="..."
-                  src={require("assets/img/fog-low.png").default}
-                />
-              </div>
-              <div className="fog-low right">
-                <img
-                  alt="..."
-                  src={require("assets/img/fog-low.png").default}
-                />
-              </div>
+              <h2 className="presentation-title">
+              <Countdown date={'2021-07-23T00:00:00'} renderer={({days}) => {
+                  return <span>{days} days to </span>;
+                }}/>
+                Tokyo Olympics 2021
+              </h2>
             </div>
-            <h2 className="presentation-subtitle text-center">
-              63 days count down
-            </h2>
           </Container>
         </div>
         <div
@@ -64,19 +55,6 @@ function IndexHeader() {
               "url(" + require("assets/img/clouds.png").default + ")",
           }}
         />
-        <h6 className="category category-absolute">
-          Designed and coded by{" "}
-          <a
-            href="https://www.creative-tim.com?ref=pkr-index-page"
-            target="_blank"
-          >
-            <img
-              alt="..."
-              className="creative-tim-logo"
-              src={require("assets/img/creative-tim-white-slim2.png").default}
-            />
-          </a>
-        </h6>
       </div>
     </>
   );

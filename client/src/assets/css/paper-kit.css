@@ -4669,7 +4669,7 @@ License - nucleoapp.com/license/
   font-size: 8em;
   font-weight: 700;
   margin: 0;
-  color: #FFFFFF;
+  color: #fbf8ec;
   background: #fbf8ec;
   background: -moz-linear-gradient(top, #FFFFFF 35%, #4e6773 100%);
   background: -webkit-linear-gradient(top, #FFFFFF 35%, #4e6773 100%);
@@ -4743,7 +4743,9 @@ License - nucleoapp.com/license/
 .section {
   padding: 70px 0;
   position: relative;
-  background-color: #FFFFFF; }
+  background-color: #FFFFFF;
+  margin-top: 50px;
+  margin-bottom: 50px;}
 
 .section-with-space {
   padding: 60px 0; }

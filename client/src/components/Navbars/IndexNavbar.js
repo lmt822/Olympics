@@ -29,6 +29,10 @@ import {
   NavLink,
   Nav,
   Container,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  UncontrolledDropdown,
 } from "reactstrap";
 
 function IndexNavbar() {
@@ -68,10 +72,9 @@ function IndexNavbar() {
           <NavbarBrand
             data-placement="bottom"
             href="/index"
-            target="_blank"
-            title="Coded by Creative Tim"
+            title="Olympics"
           >
-            Paper Kit React
+           Olympics
           </NavbarBrand>
           <button
             aria-expanded={navbarCollapse}
@@ -91,10 +94,131 @@ function IndexNavbar() {
           isOpen={navbarCollapse}
         >
           <Nav navbar>
+             <NavItem>
+              <NavLink
+                data-placement="bottom"
+                href="/country"
+              >
+                Country
+              </NavLink>
+            </NavItem>
             <NavItem>
               <NavLink
                 data-placement="bottom"
-                href="https://twitter.com/CreativeTim?ref=creativetim"
+                href="/sport"
+              >
+                Sport
+              </NavLink>
+            </NavItem>
+            <UncontrolledDropdown nav inNavbar>
+                      <DropdownToggle
+                        aria-expanded={false}
+                        aria-haspopup={true}
+                        caret
+                        color="default"
+                        data-toggle="dropdown"
+                        href="#pablo"
+                        id="dropdownMenuButton"
+                        nav
+                        onClick={(e) => e.preventDefault()}
+                        role="button"
+                      >
+                        Athlete
+                      </DropdownToggle>
+                      <DropdownMenu
+                        aria-labelledby="dropdownMenuButton"
+                        className="dropdown-info"
+                      >
+                        <DropdownItem header tag="span">
+                          Athlete information
+                        </DropdownItem>
+                        <DropdownItem
+                          href="/athlete/age"
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          Age information
+                        </DropdownItem>
+                         <DropdownItem divider />
+                        <DropdownItem
+                          href="/athlete/physical"
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          Physical statistics
+                        </DropdownItem>
+                      </DropdownMenu>
+            </UncontrolledDropdown>
+             <UncontrolledDropdown nav inNavbar>
+                      <DropdownToggle
+                        aria-expanded={false}
+                        aria-haspopup={true}
+                        caret
+                        color="default"
+                        data-toggle="dropdown"
+                        href="#pablo"
+                        id="dropdownMenuButton"
+                        nav
+                        onClick={(e) => e.preventDefault()}
+                        role="button"
+                      >
+                        Medals
+                      </DropdownToggle>
+                      <DropdownMenu
+                        aria-labelledby="dropdownMenuButton"
+                        className="dropdown-info"
+                      >
+                        <DropdownItem header tag="span">
+                          Medal Distribution
+                        </DropdownItem>
+                        <DropdownItem
+                          href="/medal/country"
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          Country information
+                        </DropdownItem>
+                        <DropdownItem divider />
+                        <DropdownItem
+                          href="/medal/developed"
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          Developed VS under-developed 
+                        </DropdownItem>
+                        <DropdownItem divider />
+                        <DropdownItem
+                          href="/medal/participation"
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          Participation rate
+                        </DropdownItem>
+                        <DropdownItem divider />
+                        <DropdownItem
+                          href="/medal/average"
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          Average medals per athlete
+                        </DropdownItem>
+                      </DropdownMenu>
+                    </UncontrolledDropdown>
+            <NavItem>
+              <NavLink
+                data-placement="bottom"
+                href="/map"
+              >
+                Map
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                data-placement="bottom"
+                href="/about"
+              >
+                About
+              </NavLink>
+            </NavItem>
+
+            <NavItem>
+              <NavLink
+                data-placement="bottom"
+                href="https://twitter.com/Olympics?ref=Olympics"
                 target="_blank"
                 title="Follow us on Twitter"
               >
@@ -105,7 +229,7 @@ function IndexNavbar() {
             <NavItem>
               <NavLink
                 data-placement="bottom"
-                href="https://www.facebook.com/CreativeTim?ref=creativetim"
+                href="https://www.facebook.com/olympics?ref=olympics"
                 target="_blank"
                 title="Like us on Facebook"
               >
@@ -116,7 +240,7 @@ function IndexNavbar() {
             <NavItem>
               <NavLink
                 data-placement="bottom"
-                href="https://www.instagram.com/CreativeTimOfficial?ref=creativetim"
+                href="https://www.instagram.com/olympics?ref=olympics"
                 target="_blank"
                 title="Follow us on Instagram"
               >
@@ -125,32 +249,13 @@ function IndexNavbar() {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink
-                data-placement="bottom"
-                href="https://www.github.com/CreativeTimOfficial/paper-kit-react?ref=creativetim"
-                target="_blank"
-                title="Star on GitHub"
-              >
-                <i className="fa fa-github" />
-                <p className="d-lg-none">GitHub</p>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                href="https://demos.creative-tim.com/paper-kit-react/#/documentation?ref=pkr-index-navbar"
-                target="_blank"
-              >
-                <i className="nc-icon nc-book-bookmark" /> Documentation
-              </NavLink>
-            </NavItem>
-            <NavItem>
               <Button
                 className="btn-round"
-                color="danger"
-                href="https://www.creative-tim.com/product/paper-kit-pro-react?ref=pkr-index-navbar"
+                color="info"
+                href="https://www.olympic.org/"
                 target="_blank"
               >
-                <i className="nc-icon nc-spaceship"></i> Upgrade to Pro
+                <i className="nc-icon nc-world-2"></i> Olympics Official Website
               </Button>
             </NavItem>
           </Nav>
