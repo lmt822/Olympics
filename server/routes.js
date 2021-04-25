@@ -37,9 +37,9 @@ const query = `
 
 /* ---- Q1a (Dashboard) ---- */
 // Equivalent to: function getTop20Keywords(req, res) {}
-const getTop20Keywords = (req, res) => {
+const getTop10Countries = (req, res) => {
   const query = `
-    SELECT * FROM Participates;
+    SELECT Country_name FROM Country ORDER BY GDP DESC LIMIT 10
   `;
   connection.query(query, (err, rows, fields) => {
     if (err) console.log(err);
@@ -49,15 +49,30 @@ const getTop20Keywords = (req, res) => {
 
 
 /* ---- Q1b (Dashboard) ---- */
-const getTopMoviesWithKeyword = (req, res) => {
-  var keyword = req.params.keyword;
+const getTopSportsWithCountry = (req, res) => {
+  var inputKeyword = req.params.keyword;
   const query = `
-    SELECT * FROM Participates;
+  WITH winners AS(
+    SELECT Athlete_ID, Olympic_ID, Event_ID 
+    FROM Participates p
+    JOIN Athlete a ON a.ID = p.Athlete_ID 
+    WHERE medal = "Gold" AND a.Country = '` + inputKeyword + `'
+    GROUP BY a.NOC, p.Olympic_ID, p.Event_ID)
+    SELECT ge.Sport AS sports, COUNT(*) AS medals
+    FROM winners w
+    JOIN Game_Event ge 
+    ON w.Olympic_ID = ge.Olympic_ID AND w.Event_ID = ge.Event_ID 
+    GROUP BY Sport 
+    ORDER BY COUNT(*) DESC 
+    LIMIT 20    
   `;
   
   connection.query(query, (err, rows, fields) => {
     if (err) console.log(err);
-    else res.json(rows);
+    else {
+      console.log(rows);
+      res.json(rows);
+    }
   });
 };
 
@@ -94,28 +109,12 @@ const getRecs = (req, res) => {
 };
 
 
-/* ---- Q3a (Best Movies) ---- */
-const getDecades = (req, res) => {
-  const query = `
-    SELECT DISTINCT (release_year - release_year MOD 10) AS decade
-    FROM movie
-    ORDER BY decade;
-  `;
-
-  connection.query(query, (err, rows, fields) => {
-    if (err) console.log(err);
-    else res.json(rows);
-  });
-};
-
-
 /* ---- (Best Movies) ---- */
-const getGenres = (req, res) => {
+const getCountries = (req, res) => {
   const query = `
-    SELECT name
-    FROM genre
-    WHERE name <> 'genres'
-    ORDER BY name ASC;
+    SELECT Country_name
+    FROM Country
+    ORDER BY Country_name ASC;
   `;
 
   connection.query(query, (err, rows, fields) => {
@@ -125,49 +124,36 @@ const getGenres = (req, res) => {
 };
 
 
-/* ---- Q3b (Best Movies) ---- */
-const bestMoviesPerDecadeGenre = (req, res) => {
-  var decade = req.params.decade;
-  var genre = req.params.genre;
+// /* ---- Q3b (Best Movies) ---- */
+// const bestMoviesPerDecadeGenre = (req, res) => {
+//   var genre = req.params.genre;
   
-  const query = `
-    with m AS (
-      SELECT mv.movie_id, mv.title, mv.rating
-      FROM movie mv JOIN movie_genre mg ON mv.movie_id = mg.movie_id
-      WHERE mg.genre_name = '` + genre + `' AND (mv.release_year - mv.release_year MOD 10) = ` + decade + `
-    ),
-    g AS (
-      SELECT DISTINCT mg.genre_name
-      FROM m JOIN movie_genre mg ON m.movie_id = mg.movie_id
-    ),
-    r AS (
-      SELECT g.genre_name, AVG(mv.rating) as avg_rating
-      FROM g JOIN movie_genre mg ON g.genre_name = mg.genre_name JOIN movie mv ON mv.movie_id = mg.movie_id
-      WHERE (mv.release_year - mv.release_year MOD 10) = ` + decade + `
-      GROUP BY g.genre_name
-    ),
-    mr AS (
-      SELECT r.genre_name, r.avg_rating, m.movie_id
-      FROM m JOIN movie_genre mg ON m.movie_id = mg.movie_id JOIN r ON mg.genre_name = r.genre_name
-    )
-    SELECT DISTINCT m.title, m.movie_id, m.rating
-    FROM m JOIN mr ON m.movie_id = mr.movie_id
-    WHERE m.rating > ALL (SELECT avg_rating FROM mr WHERE movie_id = m.movie_id)
-    ORDER BY m.title
-    LIMIT 100;
-  `;
+//   const query = `
+//     WITH winners AS(
+//     SELECT Athlete_ID, Olympic_ID, Event_ID 
+//     FROM Participates p
+//     JOIN Athlete a ON a.ID = p.Athlete_ID 
+//     WHERE medal = "Gold" AND a.Country = '` + genre + `'
+//     GROUP BY a.NOC, p.Olympic_ID, p.Event_ID)
+//     SELECT ge.Sport AS sports, COUNT(*) AS medals
+//     FROM winners w
+//     JOIN Game_Event ge 
+//     ON w.Olympic_ID = ge.Olympic_ID AND w.Event_ID = ge.Event_ID 
+//     GROUP BY Sport 
+//     ORDER BY COUNT(*) DESC 
+//     LIMIT 20    
+//   `;
 
-  connection.query(query, (err, rows, fields) => {
-    if (err) console.log(err);
-    else res.json(rows);
-  });
-};
+//   connection.query(query, (err, rows, fields) => {
+//     if (err) console.log(err);
+//     else res.json(rows);
+//   });
+// };
 
 module.exports = {
-	getTop20Keywords: getTop20Keywords,
-	getTopMoviesWithKeyword: getTopMoviesWithKeyword,
+	getTop10Countries: getTop10Countries,
+	getTopSportsWithCountry: getTopSportsWithCountry,
 	getRecs: getRecs,
-  getDecades: getDecades,
-  getGenres: getGenres,
-  bestMoviesPerDecadeGenre: bestMoviesPerDecadeGenre
+  getCountries: getCountries,
+  // bestMoviesPerDecadeGenre: bestMoviesPerDecadeGenre
 };
