@@ -45,25 +45,9 @@ const getTop20Atheletes = (req, res) => {
 };
 
 
-<<<<<<< HEAD
-/* ---- Q1a (Dashboard) ---- */
-// Equivalent to: function getTop20Keywords(req, res) {}
-const getTop10Countries = (req, res) => {
-  const query = `
-    SELECT Country_name FROM Country ORDER BY GDP DESC LIMIT 10
-    `;
-    connection.query(query, (err, rows, fields) => {
-      if (err) console.log(err);
-      else res.json(rows);
-    });
-  };
-
-const getTop20Athletes = (req, res) => {
-=======
 /* ---- Query 2 top 20 countries ---- */
 const getTop20Countries = (req, res) => {
   console.log('Top 20 performing countries:');
->>>>>>> 917e7afdbeb2df8a1a7a2eec455f2ea76664ce0e
   const query = `
       WITH winners AS(
       SELECT Athlete_ID, Olympic_ID, Event_ID 
@@ -418,15 +402,6 @@ const getHeightandWeight = (req, res) => {
     }  });
 };
 
-<<<<<<< HEAD
-module.exports = {
-	getTop10Countries: getTop10Countries,
-	getTopSportsWithCountry: getTopSportsWithCountry,
-	getTop20Athletes: getTop20Athletes,
-	getRecs: getRecs,
-  getCountries: getCountries,
-  // bestMoviesPerDecadeGenre: bestMoviesPerDecadeGenre
-=======
 
 module.exports = {
 	getTop20Atheletes: getTop20Atheletes,
@@ -440,5 +415,4 @@ module.exports = {
   getAverageMedalsPerAthlete: getAverageMedalsPerAthlete,
   getAverageAge: getAverageAge,
   getHeightandWeight: getHeightandWeight
->>>>>>> 917e7afdbeb2df8a1a7a2eec455f2ea76664ce0e
 };
