@@ -31,6 +31,8 @@ import LandingPage from "views/examples/LandingPage.js";
 import ProfilePage from "views/examples/ProfilePage.js";
 import RegisterPage from "views/examples/RegisterPage.js";
 import CountryPage from "views/examples/CountryPage.js";
+import MapPage from "views/examples/MapPage.js";
+
 // others
 
 ReactDOM.render(
@@ -56,6 +58,10 @@ ReactDOM.render(
       <Route
         path="/country"
         render={(props) => <CountryPage {...props} />}
+      />
+      <Route
+        path="/map"
+        render={(props) => <MapPage {...props} />}
       />
       <Redirect to="/index" />
     </Switch>
