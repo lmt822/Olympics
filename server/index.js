@@ -13,32 +13,38 @@ app.use(bodyParser.urlencoded({extended: false}));
 /* ------------------- Route handler registration ----------------- */
 /* ---------------------------------------------------------------- */
 
-/* ---- (Dashboard) ---- */
-// The route localhost:8081/keywords is registered to the function
-// routes.getTop10Countries, specified in routes.js.
-app.get('/keywords', routes.getTop10Countries);
+/* ---- (main page： top 20 athletes) ---- */
+app.get('/getTop20Atheletes', routes.getTop20Atheletes);
 
+/* ---- (main page： top 20 countries) ---- */
+app.get('/getTop20Countries', routes.getTop20Countries);
 
-/* ---- Q1b (Dashboard) ---- */
-app.get('/keywords/:keyword', routes.getTopSportsWithCountry);
-// routes.getTop20Keywords, specified in routes.js.
-app.get('/getTop20Athletes', routes.getTop20Athletes);
+/* ---- (sport information page：top athletes by input sport) ---- */
+app.get('/sport/:sportName', routes.getTop20AtheletesBySport);
 
+/* ---- (country information page: name of the top 20 sports of the input country by gold medal count) ---- */
+app.get('/country/:countryName', routes.getTop20SportsGivenCountry);
 
-<<<<<<< Updated upstream
-=======
-/* ---- Q2 (Recommendations) ---- */
-app.get('/recommendations/:movieName', routes.getRecs);
+/* ---- (macro-level page: Distribution of medals based on countries in an input sport in an input decade) ---- */
+app.get('/macroMedals/:decade/:sport/:medalType', routes.getMedalsGivenSportandDecade);
 
+/* ---- (macro-level page: Olympic performance (number of gold medals) of developed countries) ---- */
+app.get('/getDeveloped', routes.getDeveloped);
 
->>>>>>> Stashed changes
-/* ---- (Best Movies) ---- */
-app.get('/getcountry', routes.getCountries);
+/* ---- (macro-level page: Olympic performance (number of gold medals) of underdeveloped countries) ---- */
+app.get('/getUnderdeveloped', routes.getUnderdeveloped);
 
+/* ---- (macro-level page: Olympic participation ratio) ---- */
+app.get('/getParticipationRatio', routes.getParticipationRatio);
 
-/* ---- Q3b (Best Movies) ---- */
-// app.get('/getcountry/:country', routes.getTopSportsWithCountry);
+/* ---- (macro-level page: Average Medals per Athlete) ---- */
+app.get('/getAverageMedalsPerAthlete', routes.getAverageMedalsPerAthlete);
 
+/* ---- (micro-level page: Average Age of gold medal winners in a given sport in an input decade)---- */
+app.get('/getAverageAge', routes.getAverageAge);
+
+/* ---- (micro-level page: Average height and weight of winners of a given sport in different decades) ---- */
+app.get('/getHeightandWeight', routes.getHeightandWeight);
 
 app.listen(8081, () => {
 	console.log(`Server listening on PORT 8081`);
