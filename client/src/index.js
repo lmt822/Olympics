@@ -32,7 +32,6 @@ import ProfilePage from "views/examples/ProfilePage.js";
 import RegisterPage from "views/examples/RegisterPage.js";
 import MapPage from "views/examples/MapPage.js";
 
-import CountryPage from "views/index-sections/SectionCountry.js";
 // others
 
 ReactDOM.render(
