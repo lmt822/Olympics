@@ -30,17 +30,9 @@ import NucleoIcons from "views/NucleoIcons.js";
 import LandingPage from "views/examples/LandingPage.js";
 import ProfilePage from "views/examples/ProfilePage.js";
 import RegisterPage from "views/examples/RegisterPage.js";
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-import CountryPage from "views/examples/CountryPage.js";
 import MapPage from "views/examples/MapPage.js";
 
-=======
 import CountryPage from "views/index-sections/SectionCountry.js";
->>>>>>> Stashed changes
-=======
-import CountryPage from "views/index-sections/SectionCountry.js";
->>>>>>> Stashed changes
 // others
 
 ReactDOM.render(

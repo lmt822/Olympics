@@ -47,6 +47,7 @@ const getTop10Countries = (req, res) => {
     });
   };
 
+
 const getTop20Athletes = (req, res) => {
   const query = `
     WITH winners AS(
