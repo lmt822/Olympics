@@ -66,7 +66,7 @@ function IndexNavbar() {
     };
   });
   return (
-    <Navbar className={classnames("fixed-top", navbarColor)} expand="lg">
+    <Navbar className={classnames("fixed-top", navbarColor)} expand="lg" background>
       <Container>
         <div className="navbar-translate">
           <NavbarBrand

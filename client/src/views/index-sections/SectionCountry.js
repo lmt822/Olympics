@@ -20,6 +20,8 @@ import React from "react";
 // plugin that creates slider
 import Slider from "nouislider";
 import SportRow from '../../components/SportRow';
+import IndexNavbar from "components/Navbars/IndexNavbar.js";
+import CountryHeader from "components/Headers/CountryHeader.js"
 
 // reactstrap components
 import {
@@ -37,7 +39,7 @@ import {
 } from "reactstrap";
 
 
-export default class SectionButtons extends React.Component {
+export default class CountryPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -155,6 +157,9 @@ componentDidMount() {
 
   render() {    
     return (
+      <>
+      <IndexNavbar />
+      <CountryHeader />
       <div className="section section-buttons">
 
 
@@ -195,7 +200,8 @@ componentDidMount() {
 
 
         </div>
-      </div>           
+      </div>     
+      </>      
     );
   };
 };

@@ -37,11 +37,16 @@ const query = `
 
 /* ---- Q1a (Dashboard) ---- */
 // Equivalent to: function getTop20Keywords(req, res) {}
-<<<<<<< Updated upstream
 const getTop10Countries = (req, res) => {
   const query = `
     SELECT Country_name FROM Country ORDER BY GDP DESC LIMIT 10
-=======
+    `;
+    connection.query(query, (err, rows, fields) => {
+      if (err) console.log(err);
+      else res.json(rows);
+    });
+  };
+
 const getTop20Athletes = (req, res) => {
   const query = `
     WITH winners AS(
@@ -58,7 +63,6 @@ const getTop20Athletes = (req, res) => {
     SELECT a.Name 
     FROM Athlete a
     JOIN top t ON a.ID = t.ID;
->>>>>>> Stashed changes
   `;
   connection.query(query, (err, rows, fields) => {
     if (err) console.log(err);
@@ -170,13 +174,9 @@ const getCountries = (req, res) => {
 // };
 
 module.exports = {
-<<<<<<< Updated upstream
 	getTop10Countries: getTop10Countries,
 	getTopSportsWithCountry: getTopSportsWithCountry,
-=======
 	getTop20Athletes: getTop20Athletes,
-	getTopMoviesWithKeyword: getTopMoviesWithKeyword,
->>>>>>> Stashed changes
 	getRecs: getRecs,
   getCountries: getCountries,
   // bestMoviesPerDecadeGenre: bestMoviesPerDecadeGenre

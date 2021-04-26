@@ -221,8 +221,8 @@ function SectionButtons() {
                 >
                   Warning
                 </Button>
-                <Button className="btn-round mr-1" color="danger" type="button">
-                  Danger
+                <Button className="btn-round mr-1" color="danger" type="button" onClick={() => this.topAthletes('china')}>
+                  China
                 </Button>
                 <Button className="btn-round" color="neutral" type="button">
                   Neutral
