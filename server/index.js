@@ -41,10 +41,10 @@ app.get('/getParticipationRatio', routes.getParticipationRatio);
 app.get('/getAverageMedalsPerAthlete', routes.getAverageMedalsPerAthlete);
 
 /* ---- (micro-level page: Average Age of gold medal winners in a given sport in an input decade)---- */
-app.get('/getAverageAge', routes.getAverageAge);
+app.get('/getAverageAge/:decade/:sport', routes.getAverageAge);
 
 /* ---- (micro-level page: Average height and weight of winners of a given sport in different decades) ---- */
-app.get('/getHeightandWeight', routes.getHeightandWeight);
+app.get('/getHeightandWeight/:sport', routes.getHeightandWeight);
 
 app.listen(8081, () => {
 	console.log(`Server listening on PORT 8081`);
