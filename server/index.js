@@ -25,6 +25,13 @@ app.get('/keywords/:keyword', routes.getTopSportsWithCountry);
 app.get('/getTop20Athletes', routes.getTop20Athletes);
 
 
+<<<<<<< Updated upstream
+=======
+/* ---- Q2 (Recommendations) ---- */
+app.get('/recommendations/:movieName', routes.getRecs);
+
+
+>>>>>>> Stashed changes
 /* ---- (Best Movies) ---- */
 app.get('/getcountry', routes.getCountries);
 
