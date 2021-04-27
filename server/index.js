@@ -14,13 +14,13 @@ app.use(bodyParser.urlencoded({extended: false}));
 /* ---------------------------------------------------------------- */
 
 /* ---- (main page： top 20 athletes) ---- */
-app.get('/getTop20Atheletes', routes.getTop20Atheletes);
+app.get('/getTop20Athletes', routes.getTop20Athletes);
 
 /* ---- (main page： top 20 countries) ---- */
 app.get('/getTop20Countries', routes.getTop20Countries);
 
 /* ---- (sport information page：top athletes by input sport) ---- */
-app.get('/sport/:sportName', routes.getTop20AtheletesBySport);
+app.get('/sport/:sportName', routes.getTop20AthletesBySport);
 
 /* ---- (country information page: name of the top 20 sports of the input country by gold medal count) ---- */
 app.get('/country/:countryName', routes.getTop20SportsGivenCountry);
@@ -45,6 +45,12 @@ app.get('/getAverageAge/:decade/:sport', routes.getAverageAge);
 
 /* ---- (micro-level page: Average height and weight of winners of a given sport in different decades) ---- */
 app.get('/getHeightandWeight/:sport', routes.getHeightandWeight);
+
+/* ---- For the interactive map: the number of gold medals for each country ---- */
+app.get('/getmedals', routes.getMedals);
+
+/* ---- For country page dropdown ---- */
+app.get('/getcountry', routes.getCountries);
 
 app.listen(8081, () => {
 	console.log(`Server listening on PORT 8081`);

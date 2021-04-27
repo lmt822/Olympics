@@ -59,7 +59,7 @@ export default class CountryPage extends React.Component {
 
 componentDidMount() {
   Promise.all([
-    fetch("http://localhost:8081/keywords", {
+    fetch("http://localhost:8081/getTop20Countries", {
       method: 'GET' 
       }),
     fetch("http://localhost:8081/getcountry", {
@@ -109,7 +109,7 @@ componentDidMount() {
 
 
   submitCountry() {
-		fetch("http://localhost:8081/keywords/" + this.state.selectedCountry,
+		fetch("http://localhost:8081/country/" + this.state.selectedCountry,
 		{
 			method: 'GET' 
 		}).then(res => {
@@ -133,7 +133,7 @@ componentDidMount() {
 
 
   showSports(keyword) {
-    fetch("http://localhost:8081/keywords/" + keyword,
+    fetch("http://localhost:8081/country/" + keyword,
     {
       method: 'GET' 
     }).then(res => { 

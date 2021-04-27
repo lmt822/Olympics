@@ -16,7 +16,7 @@ console.log('Connected to rds');
 
 
 /* ---- Query 1, top 20 Athletes ---- */
-const getTop20Atheletes = (req, res) => {
+const getTop20Athletes = (req, res) => {
   console.log('Top 20 performing atheletes:');
   const query = `
     WITH winners AS(
@@ -81,7 +81,7 @@ const getTop20Countries = (req, res) => {
 };
 
 /* ---- Query 1', top 20 Athletes by input sport ---- */
-const getTop20AtheletesBySport = (req, res) => {
+const getTop20AthletesBySport = (req, res) => {
   var sportName = req.params.sportName;
   const query = `
       WITH sport AS(
@@ -120,9 +120,9 @@ const getTop20SportsGivenCountry = (req, res) => {
       SELECT Athlete_ID, Olympic_ID, Event_ID 
       FROM Participates p
       JOIN Athlete a ON a.ID = p.Athlete_ID 
-      WHERE medal = "Gold" AND a.NOC = "` + countryName + `"
+      WHERE medal = "Gold" AND a.Country = "` + countryName + `"
       GROUP BY a.NOC, p.Olympic_ID, p.Event_ID)
-      SELECT ge.Sport, COUNT(*) AS medals
+      SELECT ge.Sport AS sports, COUNT(*) AS medals
       FROM winners w
       JOIN Game_Event ge 
       ON w.Olympic_ID = ge.Olympic_ID AND w.Event_ID = ge.Event_ID 
@@ -393,20 +393,61 @@ const getHeightandWeight = (req, res) => {
         ON a.ID = w.Athlete_ID
         GROUP BY w.decade_year
   `;
-  
   connection.query(query, (err, rows, fields) => {
     if (err) console.log(err);
-    else {
-        console.log(rows);
-        res.json(rows);
-    }  });
+    else res.json(rows);
+  });
+};
+
+const getMedals = (req, res) => {
+  const query = `
+   WITH winners AS(
+    SELECT Athlete_ID, Olympic_ID, Event_ID 
+    FROM Participates 
+    WHERE medal = "Gold"),
+    topcountry AS
+    (SELECT * 
+    FROM Athlete a JOIN winners w
+    ON a.ID = w.Athlete_ID
+    WHERE NOC <> "ERR"
+    GROUP BY NOC, Olympic_ID, Event_ID),
+    medal AS (
+    SELECT NOC, COUNT(*) AS medals
+    FROM topcountry t
+    GROUP BY NOC
+    ORDER BY COUNT(*) DESC)
+    SELECT c.Country_name as name, m.medals as gold
+    FROM medal m
+    JOIN Country c
+    ON m.NOC = c.NOC 
+  `;
+
+  connection.query(query, (err, rows, fields) => {
+    if (err) console.log(err);
+    else res.json(rows);
+  });
 };
 
 
+const getCountries = (req, res) => {
+  const query = `
+    SELECT Country_name
+    FROM Country
+    ORDER BY Country_name
+  `;
+
+  connection.query(query, (err, rows, fields) => {
+    if (err) console.log(err);
+    else res.json(rows);
+  });
+};
+
+
+
 module.exports = {
-	getTop20Atheletes: getTop20Atheletes,
+	getTop20Athletes: getTop20Athletes,
 	getTop20Countries: getTop20Countries,
-	getTop20AtheletesBySport: getTop20AtheletesBySport,
+	getTop20AthletesBySport: getTop20AthletesBySport,
 	getTop20SportsGivenCountry: getTop20SportsGivenCountry,
   getMedalsGivenSportandDecade: getMedalsGivenSportandDecade,
   getDeveloped: getDeveloped,
@@ -414,5 +455,7 @@ module.exports = {
   getParticipationRatio: getParticipationRatio,
   getAverageMedalsPerAthlete: getAverageMedalsPerAthlete,
   getAverageAge: getAverageAge,
-  getHeightandWeight: getHeightandWeight
+  getHeightandWeight: getHeightandWeight,
+  getCountries: getCountries,
+  getMedals: getMedals
 };
