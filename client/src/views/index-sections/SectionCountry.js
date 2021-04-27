@@ -186,6 +186,7 @@ componentDidMount() {
             </div>
 
             <br />
+            <container>
             <div className="jumbotron">
               <div className="sports-container">
                 <div className="sport">
@@ -195,8 +196,18 @@ componentDidMount() {
                 <div className="sports-container" id="results">
                   {this.state.sports}
                 </div>
+                <Row>
+                  <Col className="ml-auto mr-auto" md="6">
+                    <ul classNmae="list-unstyled">
+                      <li>
+                        {this.state.sports}
+                      </li>
+                    </ul>
+                  </Col>
+                </Row>
               </div>
             </div>
+            </container>
 			  </div>
 
 
