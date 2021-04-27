@@ -356,8 +356,22 @@ componentDidMount() {
     return (
         <>
             <IndexNavbar />
-            {/* <LandingPageHeader /> */}
-        <WorldMap color="red" title="" value-suffix="people" size="xxl" data={this.state.medals} />
+         
+            <div id="typography">
+                <Row>
+                    <div className="typography-line">
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <h1>
+                            <span className="title"></span>
+                            Gold Medals Distribution
+                        </h1>
+                    </div>
+                </Row>
+            </div>
+
+            <WorldMap color="red" title="" value-suffix="people" size="xxl" data={this.state.medals} />
         </>
         );
     };

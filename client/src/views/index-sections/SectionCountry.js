@@ -19,6 +19,7 @@
 import React from "react";
 // plugin that creates slider
 import Slider from "nouislider";
+import '../../assets/css/SectionCountry.css';
 import SportRow from '../../components/SportRow';
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import CountryHeader from "components/Headers/CountryHeader.js"
