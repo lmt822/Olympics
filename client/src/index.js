@@ -32,6 +32,10 @@ import ProfilePage from "views/examples/ProfilePage.js";
 import RegisterPage from "views/examples/RegisterPage.js";
 import MapPage from "views/examples/MapPage.js";
 import CountryPage from "views/index-sections/SectionCountry.js";
+import ParticipationPage from "views/index-sections/SectionParticipation.js";
+import AveregeMedalPage from "views/index-sections/SectionAverageMedal.js";
+import DevVSUnderPage from "views/index-sections/SectionDevVSUnder.js";
+
 // others
 
 ReactDOM.render(
