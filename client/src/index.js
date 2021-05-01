@@ -62,6 +62,18 @@ ReactDOM.render(
         path="/map"
         render={(props) => <MapPage {...props} />}
       />
+      <Route
+        path="/medal/participation"
+        render={(props) => <ParticipationPage {...props} />}
+      />
+      <Route
+        path="/medal/average"
+        render={(props) => <AveregeMedalPage {...props} />}
+      />
+      <Route
+        path="/medal/developed"
+        render={(props) => <DevVSUnderPage {...props} />}
+      />
       <Redirect to="/index" />
     </Switch>
   </BrowserRouter>,
