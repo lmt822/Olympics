@@ -387,7 +387,7 @@ const getHeightandWeight = (req, res) => {
           JOIN decade d
           ON d.Olympic_ID = p.Olympic_ID AND d.Event_ID = p.Event_ID 
           WHERE medal = "Gold")
-        SELECT AVG(a.Height), AVG(a.Weight), decade_year
+        SELECT AVG(a.Height) AS height, AVG(a.Weight) AS weight, decade_year
         FROM winners w
         JOIN Athlete a
         ON a.ID = w.Athlete_ID

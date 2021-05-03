@@ -33,7 +33,7 @@ import RegisterPage from "views/examples/RegisterPage.js";
 import MapPage from "views/examples/MapPage.js";
 import CountryPage from "views/index-sections/SectionCountry.js";
 import AgePage from "views/index-sections/SectionAge.js";
-// import StatsPage from "views/index-sections/SectionStats.js";
+import StatsPage from "views/index-sections/SectionStats.js";
 import DistributionPage from "views/index-sections/SectionDistribution.js";
 import ParticipationPage from "views/index-sections/SectionParticipation.js";
 import AveregeMedalPage from "views/index-sections/SectionAverageMedal.js";
@@ -73,10 +73,10 @@ ReactDOM.render(
         path="/athlete/age"
         render={(props) => <AgePage {...props} />}
       />
-      {/* <Route
+      <Route
         path="/athlete/physical"
         render={(props) => <StatsPage {...props} />}
-      /> */}
+      />
       <Route
         path="/medal/country"
         render={(props) => <DistributionPage {...props} />}
