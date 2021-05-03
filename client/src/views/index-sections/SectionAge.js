@@ -19,9 +19,9 @@
 import React from "react";
 // plugin that creates slider
 import Slider from "nouislider";
-import DistributionRow from '../../components/DistributionRow';
+import AgeRow from '../../components/AgeRow';
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
-import DistributionHeader from "components/Headers/DistributionHeader.js"
+import AgeHeader from "components/Headers/AgeHeader.js"
 
 // reactstrap components
 import {
@@ -39,7 +39,7 @@ import {
 } from "reactstrap";
 
 
-export default class DistributionPage extends React.Component {
+export default class AgePage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -48,17 +48,14 @@ export default class DistributionPage extends React.Component {
     this.state = {
         decade_options: [],
         sport_options: [],
-        medalType_options: [],
-        distribution: [],
+        age: [],
         selectedDecade: "1890",
-        selectedSport: "Aeronautics",
-        selectedMedalType: "Gold"
+        selectedSport: "Aeronautics"
     };
 
     this.submitFilter = this.submitFilter.bind(this);
 	this.handleDecadeChange = this.handleDecadeChange.bind(this);
     this.handleSportChange = this.handleSportChange.bind(this);
-    this.handleMedalTypeChange = this.handleMedalTypeChange.bind(this);
   };
 
 componentDidMount() {
@@ -68,18 +65,15 @@ componentDidMount() {
       }),
     fetch("http://localhost:8081/getsport", {
       method: 'GET' 
-      }),
-      fetch("http://localhost:8081/getmedaltype", {
-      method: 'GET' 
       })
-    ]).then(([res0, res1, res2]) => {
+    ]).then(([res0, res1]) => {
     // Convert the response data to a JSON.
-    return Promise.all([res0.json(), res1.json(), res2.json()])
+    return Promise.all([res0.json(), res1.json()])
     }, err => {
     // Print the error if there is one.
     console.log(err);
-    }).then(([decadeList, sportList, medalTypeList]) => {
-    if (!decadeList || !sportList || !medalTypeList) return;
+    }).then(([decadeList, sportList]) => {
+    if (!decadeList || !sportList) return;
 
     // Map each country in this.state.countries to an HTML element:
     // A button which triggers the showSports function for each country.
@@ -91,16 +85,11 @@ componentDidMount() {
     const sportOpt = sportList.map((sportObj, i) =>
     <option className="sportOption" value={sportObj.sport}>{sportObj.sport}</option>
     );
-    
-    const medalTypeOpt = medalTypeList.map((medalTypeObj, i) =>
-    <option className="medalTypeOption" value={medalTypeObj.medalType}>{medalTypeObj.medalType}</option>
-    );
   
     // Set the state of the countries list to the value returned by the HTTP response from the server.
     this.setState({
       decade_options: decadeOpt,
       sport_options: sportOpt,
-      medalType_options: medalTypeOpt
     });
   }, err => {
     // Print the error if there is one.
@@ -120,31 +109,24 @@ componentDidMount() {
       });
 	  };
 
-    handleMedalTypeChange(e) {
-      this.setState({
-        selectedMedalType: e.target.value
-      });
-    };
-
 
   submitFilter() {
-        fetch("http://localhost:8081/macroMedals/" + this.state.selectedDecade + "/" + this.state.selectedSport + "/" + this.state.selectedMedalType,
+        fetch("http://localhost:8081/getAverageAge/" + this.state.selectedDecade + "/" + this.state.selectedSport,
 		{
 			method: 'GET' 
 		}).then(res => {
 			return res.json();
 		}, err => {
 			console.log(err);
-		}).then(distributionList => {
-            console.log(distributionList);
-			let distributionDivs = distributionList.map((distribution, i) => 
-            <DistributionRow 
-                country = {distribution.country}
-                medals = {distribution.medals} 
+		}).then(ageList => {
+            console.log(ageList);
+			let ageDivs = ageList.map((age, i) => 
+            <AgeRow 
+                average_age = {age.average_age} 
             /> 
 			);		
 			this.setState({
-				distribution: distributionDivs
+				age: ageDivs
 				});
 			}, err => {
 				console.log(err);
@@ -156,21 +138,18 @@ componentDidMount() {
     return (
       <>
       <IndexNavbar />
-      <DistributionHeader/>
+      <AgeHeader/>
       <div className="section section-buttons">
 
-        <div className="container distribution-container">
+        <div className="container age-container">
             <div className="jumbotron">
-                <div className="h5">Medal Distribution</div>
+                <div className="h5">Average Age of Gold Medal Winners</div>
                 <div className="dropdown-container">
                     <select value={this.state.selectedDecade} onChange={this.handleDecadeChange} className="dropdown" id="decadeDropdown">
                         {this.state.decade_options}
                     </select>
                     <select value={this.state.selectedSport} onChange={this.handleSportChange} className="dropdown" id="sportDropdown">
                         {this.state.sport_options}
-                    </select>
-                    <select value={this.state.selectedMedalType} onChange={this.handleMedalTypeChange} className="dropdown" id="medalTypeDropdown">
-                        {this.state.medalType_options}
                     </select>
                     <button className="submit-btn" id="submitBtn" onClick={this.submitFilter}>Submit</button>
                 </div>
@@ -181,11 +160,10 @@ componentDidMount() {
             <div className="jumbotron">
               <div className="sports-container">
                 <div className="sport">
-                  <div className="header-lg"><strong>Country</strong></div>
-                  <div className="header"><strong>Medals</strong></div>
+                  <div className="header"><strong>Average Age</strong></div>
                 </div>
                 <div className="sports-container" id="results">
-                  {this.state.distribution}
+                  {this.state.age}
                 </div>
               </div>
             </div>

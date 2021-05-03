@@ -355,7 +355,7 @@ const getAverageAge = (req, res) => {
           JOIN decade d
           ON d.Olympic_ID = p.Olympic_ID AND d.Event_ID = p.Event_ID 
           WHERE medal = "Gold")
-        SELECT AVG(w.Year - a.BirthYear)
+        SELECT AVG(w.Year - a.BirthYear) AS average_age
         FROM winners w
         JOIN Athlete a
         ON a.ID = w.Athlete_ID 

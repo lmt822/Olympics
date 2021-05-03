@@ -31,14 +31,14 @@ import { Container,
 
 const items = [
   {
-    src: require("assets/img/DistributionHeader.jpg").default,
+    src: require("assets/img/AgeHeader.jpg").default,
     altText: "Somewhere",
     caption: ""
   },
 ];
 
 // core components
-function DistributionHeader() {
+function AgeHeader() {
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [animating, setAnimating] = React.useState(false);
   const onExiting = () => {
@@ -89,7 +89,7 @@ function DistributionHeader() {
                         <img src={item.src} alt={item.altText} />
                         <CarouselCaption
                           captionText={item.caption}
-                          captionHeader="Olympic Medal Distribution based on Decade, Sport, and Medal Type"
+                          captionHeader="Olympic Gold Medal Winners Average Age"
                         />
                       </CarouselItem>
                     );
@@ -104,4 +104,4 @@ function DistributionHeader() {
   );
 }
 
-export default DistributionHeader;
+export default AgeHeader;
