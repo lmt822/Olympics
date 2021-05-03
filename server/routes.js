@@ -164,7 +164,7 @@ const getMedalsGivenSportandDecade = (req, res) => {
       WHERE medal =  "` + medalType + `"
       GROUP BY a.NOC, p.Event_ID, p.Olympic_ID
       )
-      SELECT a.Country, COUNT(*) AS medals 
+      SELECT a.Country AS country, COUNT(*) AS medals 
       FROM winners w
       JOIN Athlete a
       ON a.ID = w.Athlete_ID
@@ -443,6 +443,47 @@ const getCountries = (req, res) => {
 };
 
 
+const getDecades = (req, res) => {
+  const query = `
+    SELECT distinct FLOOR(Year/10)*10 as decade
+    FROM Olympic_Game
+    ORDER BY decade;
+  `;
+
+  connection.query(query, (err, rows, fields) => {
+    if (err) console.log(err);
+    else res.json(rows);
+  });
+};
+
+
+const getSports = (req, res) => {
+  const query = `
+    SELECT distinct Sport as sport
+    FROM Game_Event
+    ORDER BY sport;
+  `;
+
+  connection.query(query, (err, rows, fields) => {
+    if (err) console.log(err);
+    else res.json(rows);
+  });
+};
+
+
+const getMedalTypes = (req, res) => {
+  const query = `
+    SELECT distinct Medal as medalType
+    FROM Participates
+    Where Medal <> "";
+  `;
+
+  connection.query(query, (err, rows, fields) => {
+    if (err) console.log(err);
+    else res.json(rows);
+  });
+};
+
 
 module.exports = {
 	getTop20Athletes: getTop20Athletes,
@@ -457,5 +498,8 @@ module.exports = {
   getAverageAge: getAverageAge,
   getHeightandWeight: getHeightandWeight,
   getCountries: getCountries,
-  getMedals: getMedals
+  getMedals: getMedals,
+  getDecades: getDecades,
+  getSports: getSports,
+  getMedalTypes: getMedalTypes
 };

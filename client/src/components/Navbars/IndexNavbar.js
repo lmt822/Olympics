@@ -134,14 +134,14 @@ function IndexNavbar() {
                         </DropdownItem>
                         <DropdownItem
                           href="/athlete/age"
-                          onClick={(e) => e.preventDefault()}
+                          onClick={(e) => e.href()}
                         >
                           Age information
                         </DropdownItem>
                          <DropdownItem divider />
                         <DropdownItem
                           href="/athlete/physical"
-                          onClick={(e) => e.preventDefault()}
+                          onClick={(e) => e.href()}
                         >
                           Physical statistics
                         </DropdownItem>
@@ -171,28 +171,28 @@ function IndexNavbar() {
                         </DropdownItem>
                         <DropdownItem
                           href="/medal/country"
-                          onClick={(e) => e.preventDefault()}
+                          onClick={(e) => e.href()}
                         >
                           Country information
                         </DropdownItem>
                         <DropdownItem divider />
                         <DropdownItem
                           href="/medal/developed"
-                          onClick={(e) => e.preventDefault()}
+                          onClick={(e) => e.href()}
                         >
                           Developed VS under-developed 
                         </DropdownItem>
                         <DropdownItem divider />
                         <DropdownItem
                           href="/medal/participation"
-                          onClick={(e) => e.preventDefault()}
+                          onClick={(e) => e.href()}
                         >
                           Participation rate
                         </DropdownItem>
                         <DropdownItem divider />
                         <DropdownItem
                           href="/medal/average"
-                          onClick={(e) => e.preventDefault()}
+                          onClick={(e) => e.href()}
                         >
                           Average medals per athlete
                         </DropdownItem>

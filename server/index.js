@@ -52,6 +52,15 @@ app.get('/getmedals', routes.getMedals);
 /* ---- For country page dropdown ---- */
 app.get('/getcountry', routes.getCountries);
 
+/* ---- For country page dropdown ---- */
+app.get('/getdecade', routes.getDecades);
+
+/* ---- For country page dropdown ---- */
+app.get('/getsport', routes.getSports);
+
+/* ---- For country page dropdown ---- */
+app.get('/getmedaltype', routes.getMedalTypes);
+
 app.listen(8081, () => {
 	console.log(`Server listening on PORT 8081`);
 });
