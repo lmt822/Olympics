@@ -73,7 +73,7 @@ function AboutPage() {
                     <a href="#pablo" onClick={(e) => e.preventDefault()}>
                       <div className="author">
                         <CardTitle tag="h4">Muhua Chen</CardTitle>
-                        <h6 className="card-category">Product Manager</h6>
+                        <h6 className="card-category">Backend Developer</h6>
                       </div>
                     </a>
                     <p className="card-description text-center">
@@ -126,7 +126,7 @@ function AboutPage() {
                     <a href="#pablo" onClick={(e) => e.preventDefault()}>
                       <div className="author">
                         <CardTitle tag="h4">Mengtian Li</CardTitle>
-                        <h6 className="card-category">Designer</h6>
+                        <h6 className="card-category">Frontend Developer</h6>
                       </div>
                     </a>
                     <p className="card-description text-center">
@@ -181,7 +181,7 @@ function AboutPage() {
                     <a href="#pablo" onClick={(e) => e.preventDefault()}>
                       <div className="author">
                         <CardTitle tag="h4">Yanqi Liu</CardTitle>
-                        <h6 className="card-category">Developer</h6>
+                        <h6 className="card-category">Frontend Developer</h6>
                       </div>
                     </a>
                     <p className="card-description text-center">
@@ -236,13 +236,13 @@ function AboutPage() {
                     <a href="#pablo" onClick={(e) => e.preventDefault()}>
                       <div className="author">
                         <CardTitle tag="h4">Tianxiao Zhang</CardTitle>
-                        <h6 className="card-category">Product Manager</h6>
+                        <h6 className="card-category">Backend Developer</h6>
                       </div>
                     </a>
                     <p className="card-description text-center">
-                      Teamwork is so important that it is virtually impossible
-                      for you to reach the heights of your capabilities or make
-                      the money that you want without becoming very good at it.
+                    Teamwork is the ability to work together toward a common vision. 
+                    The ability to direct individual accomplishments toward organizational objectives. 
+                    It is the fuel that allows common people to attain uncommon results.
                     </p>
                   </CardBody>
                   <CardFooter className="text-center">
