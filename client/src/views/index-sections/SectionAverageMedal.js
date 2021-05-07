@@ -23,6 +23,7 @@ import '../../assets/css/SectionCountry.css';
 import AverageRow from '../../components/AverageRow';
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import AverageHeader from "components/Headers/AverageHeader.js"
+import DemoFooter from "components/Footers/DemoFooter.js";
 
 // reactstrap components
 import {
@@ -82,23 +83,21 @@ render() {
       <>
       <IndexNavbar />
       <AverageHeader />
-      <div className="section section-buttons">
 
             <br />
-            <container>
-            <div className="jumbotron">
-              <div className="sports-container">
+            <div className="container" style={{backgroundColor: "White"}}>
+              <div className="sports-container" style={{backgroundColor: "White"}}>
                 <div className="sport">
-                  <div className="header-lg"><strong>Country</strong></div>
-                  <div className="header"><strong>Average Medals per Athelete</strong></div>
+                  <div className="h4"><strong>Country</strong></div>
+                  <div className="h4"><strong>Average Medals per Athelete</strong></div>
                 </div>
                 <div className="sports-container" id="results">
                   {this.state.countries}
                 </div>
               </div>
             </div>
-            </container>
-        </div>
+      <DemoFooter />
+
       </>
     );
   };

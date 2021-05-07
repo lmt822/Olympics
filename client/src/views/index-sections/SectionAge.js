@@ -22,6 +22,8 @@ import Slider from "nouislider";
 import AgeRow from '../../components/AgeRow';
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import AgeHeader from "components/Headers/AgeHeader.js"
+import DemoFooter from "components/Footers/DemoFooter.js";
+
 
 // reactstrap components
 import {
@@ -175,7 +177,8 @@ componentDidMount() {
             </container>
 
         </div>
-      </div>     
+      </div>  
+      <DemoFooter />   
       </>      
     );
   };

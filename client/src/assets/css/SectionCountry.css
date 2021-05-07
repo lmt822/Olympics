@@ -17,6 +17,6 @@
     columns: 6rem auto;
     flex: 1 0 auto;
 }
-.sport .medals, .sport .sports{
+.sport .medals, .sport .sports, .sport .ratio{
     flex: 1 0 auto;
 }

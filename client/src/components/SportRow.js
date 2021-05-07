@@ -9,7 +9,7 @@ export default class SportRow extends React.Component {
 		return (
 			<div className="sport">
 				<div className="sports">{this.props.sports}</div>
-				<div className="medals" style={{'text-align': 'right'}}>{this.props.medals}</div>
+				<div className="medals" style={{'text-align': 'right', 'margin-right': '200px'}}>{this.props.medals}</div>
 			</div>
 		);
 	};

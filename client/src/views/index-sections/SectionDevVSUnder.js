@@ -23,6 +23,7 @@ import '../../assets/css/SectionCountry.css';
 import DevVSUnderRow from '../../components/DevVSUnderRow';
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import DevVSUnderHeader from "components/Headers/DevVSUnderHeader.js"
+import DemoFooter from "components/Footers/DemoFooter.js";
 
 // reactstrap components
 import {
@@ -106,46 +107,39 @@ render() {
       <>
       <IndexNavbar />
       <DevVSUnderHeader />
-      <div className="section section-buttons">
-
             <br />
-            <container>
-            <div className="jumbotron">
+            <div className="container" style={{backgroundColor: "White"}}>
               <div className="sports-container">
-              <div className="h5">Olympic Performance of Developed Countries (GDP per capita > 12,000 USD per year) </div>
+              <div className="h2">Olympic Performance of Developed Countries (GDP per capita > 12,000 USD per year) </div>
                 <div className="sport">
-                  <div className="header-lg"><strong>Country</strong></div>
-                  <div className="header"><strong>Number of Medals</strong></div>
+                  <div className="h3"><strong>Country</strong></div>
+                  <div className="h3"><strong>Number of Medals</strong></div>
                 </div>
                 <div className="sports-container" id="results">
                   {this.state.country}
                 </div>
               </div>
             </div>
-            </container>
 
 
             <br />
-            <container>
-            <div className="jumbotron">
+            <div className="container" style={{backgroundColor: "White"}}>
               <div className="sports-container">
-              <div className="h5"> Sports Underdeveloped Countries Win Most Medals In (GDP per capita lower than 1,000 USD per year) </div>
+              <div className="h2"> Sports Underdeveloped Countries Win Most Medals In (GDP per capita lower than 1,000 USD per year) </div>
                 <div className="sport">
-                  <div className="header-lg"><strong>Sport</strong></div>
-                  <div className="header"><strong>Number of Medals</strong></div>
+                  <div className="h3"><strong>Sport</strong></div>
+                  <div className="h3"><strong>Number of Medals</strong></div>
                 </div>
                 <div className="sports-container" id="results">
                   {this.state.sport}
                 </div>
               </div>
             </div>
-            </container>
 
 
 
+      <DemoFooter />
 
-
-        </div>
       </>
     );
   };

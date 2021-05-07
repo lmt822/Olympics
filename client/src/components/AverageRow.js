@@ -9,7 +9,7 @@ export default class ParticipationRow extends React.Component {
 		return (
 			<div className="sport">
 				<div className="name">{this.props.name}</div>
-				<div className="ratio">{this.props.ratio}</div>
+				<div className="ratio" style={{'text-align': 'right', 'margin-right': '200px'}}>{this.props.ratio}</div>
 			</div>
 		);
 	};
