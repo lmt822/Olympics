@@ -142,7 +142,12 @@ componentDidMount() {
                 country = {distribution.country}
                 medals = {distribution.medals} 
             /> 
-			);		
+			);	
+
+      if(distributionDivs.length == 0){
+        distributionDivs = "Not Available"
+      }
+
 			this.setState({
 				distribution: distributionDivs
 				});

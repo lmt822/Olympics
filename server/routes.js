@@ -172,6 +172,7 @@ const getMedalsGivenSportandDecade = (req, res) => {
         FROM winners w
         JOIN Athlete a
         ON a.ID = w.Athlete_ID
+        WHERE a.Country <> "no longer exist"
         GROUP BY a.Country
         ORDER BY COUNT(*) DESC 
         LIMIT 10
