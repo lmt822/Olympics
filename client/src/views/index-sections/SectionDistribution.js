@@ -22,6 +22,7 @@ import Slider from "nouislider";
 import DistributionRow from '../../components/DistributionRow';
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import DistributionHeader from "components/Headers/DistributionHeader.js"
+import DemoFooter from "components/Footers/DemoFooter.js";
 
 // reactstrap components
 import {
@@ -162,11 +163,8 @@ componentDidMount() {
       <>
       <IndexNavbar />
       <DistributionHeader/>
-      <div className="section section-buttons">
-
-        <div className="container distribution-container">
-            <div className="jumbotron">
-                <div className="h5">Medal Distribution</div>
+        <div className="container"style={{backgroundColor: "White"}}>
+                <div className="h2">Medal Distribution</div>
                 <div className="dropdown-container">
                     <select value={this.state.selectedDecade} onChange={this.handleDecadeChange} className="dropdown" id="decadeDropdown">
                         {this.state.decade_options}
@@ -177,7 +175,7 @@ componentDidMount() {
                     <select value={this.state.selectedMedalType} onChange={this.handleMedalTypeChange} className="dropdown" id="medalTypeDropdown">
                         {this.state.medalType_options}
                     </select>
-                    <button className="submit-btn" id="submitBtn" onClick={this.submitFilter}>Submit</button>
+                    <Button color='info'className="btn-round mr-1" type="button" onClick={this.submitFilter}>Submit</Button>
                 </div>
             </div>
 
@@ -195,9 +193,8 @@ componentDidMount() {
               </div>
             </div>
             </container>
-
-        </div>
-      </div>     
+ 
+      <DemoFooter />   
       </>      
     );
   };

@@ -20,3 +20,19 @@
 .sport .medals, .sport .sports, .sport .ratio{
     flex: 1 0 auto;
 }
+
+.stats-container .stats{
+    column-count: 3;
+    column-fill: balance;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    height: 60px;
+    column-gap: 500px;
+    columns: 6rem auto;
+    flex: 1 0 auto;
+}
+
+.stats .height, .stats .weight, .stats .decade_year{
+    flex: 1 0 auto;
+}
