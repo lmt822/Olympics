@@ -146,9 +146,9 @@ componentDidMount() {
       <AgeHeader/>
       <div className="section section-buttons">
 
-        <div className="container age-container">
-            <div className="jumbotron">
-                <div className="h5">Average Age of Medal Winners</div>
+        <div className="container age-container" style={{backgroundColor: "white"}}>
+            <div className="jumbotron" style={{backgroundColor: "white"}}>
+                <div className="h2">Average Age of Medal Winners</div>
                 <div className="dropdown-container">
                     <select value={this.state.selectedDecade} onChange={this.handleDecadeChange} className="dropdown" id="decadeDropdown">
                         {this.state.decade_options}
@@ -156,18 +156,18 @@ componentDidMount() {
                     <select value={this.state.selectedSport} onChange={this.handleSportChange} className="dropdown" id="sportDropdown">
                         {this.state.sport_options}
                     </select>
-                    <button className="submit-btn" id="submitBtn" onClick={this.submitFilter}>Submit</button>
+                    <Button color='info'className="btn-round mr-1" type="button" id="submitBtn" onClick={this.submitFilter}>Submit</Button>
                 </div>
             </div>
 
             <br />
             <container>
-            <div className="jumbotron">
-              <div className="sports-container">
+            <div className="jumbotron" style={{backgroundColor: "white"}}>
+              <div className="sports-container" style={{backgroundColor: "white"}}>
                 <div className="sport">
-                  <div className="header"><strong>Average Age</strong></div>
+                  <div className="h3"><strong>Average Age</strong></div>
                 </div>
-                <div className="sports-container" id="results">
+                <div className="h3" id="results">
                   {this.state.age}
                 </div>
               </div>
