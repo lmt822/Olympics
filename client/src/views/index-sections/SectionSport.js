@@ -23,6 +23,8 @@ import '../../assets/css/SectionCountry.css';
 import NameRow from '../../components/NameRow';
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import SportHeader from "components/Headers/SportHeader.js"
+import DemoFooter from "components/Footers/DemoFooter.js";
+
 
 // reactstrap components
 import {
@@ -124,15 +126,16 @@ componentDidMount() {
       <>
       <IndexNavbar />
       <SportHeader/>
-      <div className="section section-buttons">
-
       <br />
-        <div className="container countries-container">
-          <div className = 'jumbotron'>
-            <h5>Popular Sports with Brief Description</h5>
+        <div className="container" style={{backgroundColor: "white"}}>
+            <h2> Popular Sports with Brief Description </h2>
+            <br />
+
             <Button
-            // className="btn-round mr-1"
-            color="default"
+            className="btn-round mr-1"
+            color="danger"
+            href="https://www.google.com/search?q=Acrobatic Gymnastics"
+            targe="_blank"
             id="tooltip392938669"
             outline
             >
@@ -153,8 +156,10 @@ componentDidMount() {
       
 
             <Button
-              // className="btn-round mr-1"
-              color="default"
+              className="btn-round mr-1"
+              color="info"
+              href="https://www.google.com/search?q=Archery"
+              targe="_blank"
               id="tooltip392938670"
               outline
             >
@@ -174,8 +179,10 @@ componentDidMount() {
             </UncontrolledTooltip>
 
             <Button
-              // className="btn-round mr-1"
-              color="default"
+              className="btn-round mr-1"
+              href="https://www.google.com/search?q=Artistic gymnastics"
+              targe="_blank"
+              color="warning"
               id="tooltip392938671"
               outline
             >
@@ -197,8 +204,10 @@ componentDidMount() {
             </UncontrolledTooltip>
 
             <Button
-              // className="btn-round mr-1"
-              color="default"
+              className="btn-round mr-1"
+              href="https://www.google.com/search?q=Artistic gymnastics"
+              targe="_blank"
+              color="primary"
               id="tooltip392938672"
               outline
             >
@@ -215,8 +224,10 @@ componentDidMount() {
             </UncontrolledTooltip>
 
             <Button
-              // className="btn-round mr-1"
-              color="default"
+              className="btn-round mr-1"
+              href="https://www.google.com/search?q=biathlon"
+              targe="_blank"
+              color="success"
               id="tooltip392938673"
               outline
             >
@@ -235,8 +246,10 @@ componentDidMount() {
             </UncontrolledTooltip>
 
             <Button
-              // className="btn-round mr-1"
-              color="default"
+              className="btn-round mr-1"
+              href="https://www.google.com/search?q=BMX freestyle"
+              targe="_blank"
+              color="info"
               id="tooltip392938674"
               outline
             >
@@ -255,8 +268,10 @@ componentDidMount() {
             </UncontrolledTooltip>
 
             <Button
-              // className="btn-round mr-1"
-              color="default"
+              className="btn-round mr-1"
+              href="https://www.google.com/search?q=bobsleigh"
+              targe="_blank"
+              color="danger"
               id="tooltip392938675"
               outline
             >
@@ -277,8 +292,10 @@ componentDidMount() {
             </UncontrolledTooltip>
 
             <Button
-              // className="btn-round mr-1"
-              color="default"
+              className="btn-round mr-1"
+              href="https://www.google.com/search?q=modern pentathlon"
+              targe="_blank"
+              color="warning"
               id="tooltip392938676"
               outline
             >
@@ -301,8 +318,10 @@ componentDidMount() {
             </UncontrolledTooltip>
 
             <Button
-              // className="btn-round mr-1"
-              color="default"
+              className="btn-round mr-1"
+              href="https://www.google.com/search?q=skeleton"
+              targe="_blank"
+              color="info"
               id="tooltip392938677"
               outline
             >
@@ -326,8 +345,10 @@ componentDidMount() {
             </UncontrolledTooltip>
 
             <Button
-              // className="btn-round mr-1"
-              color="default"
+              className="btn-round mr-1"
+              href="https://www.google.com/search?q=Trampoline"
+              targe="_blank"
+              color="success"
               id="tooltip392938678"
               outline
             >
@@ -351,8 +372,10 @@ componentDidMount() {
             </UncontrolledTooltip>
 
             <Button
-              // className="btn-round mr-1"
-              color="default"
+              className="btn-round mr-1"
+              href="https://www.google.com/search?q=triathlon"
+              targe="_blank"
+              color="warning"
               id="tooltip392938679"
               outline
             >
@@ -377,39 +400,31 @@ componentDidMount() {
               focused persistent and periodised training for each of the three disciplines, 
               as well as combination workouts and general strength conditioning.
             </UncontrolledTooltip>
+        <br />
 
-
-          </div> 
-        </div>
-
-        <div className="container states-container">
-            <div className="jumbotron">
-                <div className="h5">Athletes with the most gold medals (in a given sport)</div>
+        <div className="container" style={{backgroundColor: "white"}}>
+                <h2>Athletes with the most gold medals (in a given sport)</h2>
                 <div className="dropdown-container">
                     <select value={this.state.selectedSport} onChange={this.handleSportChange} className="dropdown" id="sportDropdown">
                         {this.state.sport_options}
                     </select>
-                    <button className="submit-btn" id="submitBtn" onClick={this.submitFilter}>Submit</button>
-                </div>
+                   <Button color='info'className="btn-round mr-1" type="button" onClick={this.submitFilter}>Submit</Button>
             </div>
 
             <br />
-            <container>
-            <div className="jumbotron">
-              <div className="sports-container">
+            <div className="container" style={{backgroundColor: "White"}}>
+              <div className="country-container" style={{backgroundColor: "white"}}>
                 <div className="sport">
-                  <div className="header"><strong>Athlete Name</strong></div>
-                  <div className="header"><strong>Number of Gold Medals</strong></div>
+                  <div className="h3"><strong>Athlete</strong></div>
+                  <div className="h3" style={{'text-align': 'left'}}><strong>Number of Gold Medals</strong></div>
                 </div>
-                <div className="sports-container" id="results">
                   {this.state.names}
-                </div>
               </div>
             </div>
-            </container>
 
         </div>
-      </div>     
+      </div> 
+      <DemoFooter />    
       </>      
     );
   };
