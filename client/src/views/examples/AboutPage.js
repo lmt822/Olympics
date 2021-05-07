@@ -50,7 +50,6 @@ function AboutPage() {
   });
   return (
     <>
-      <ExamplesNavbar />
       <IndexNavbar/>
       <div className="main">
         <div className="section section-dark text-center">
