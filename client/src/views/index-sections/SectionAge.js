@@ -124,9 +124,12 @@ componentDidMount() {
                 average_age = {age.average_age} 
             /> 
 			);
-      if(typeof ageDivs !=='undefined'){
+      
+      console.log(ageDivs[0].props.average_age);
+      if(ageDivs[0].props.average_age === null){
         ageDivs = "Not Available"
       }		
+      
 			this.setState({
 				age: ageDivs
 				});
