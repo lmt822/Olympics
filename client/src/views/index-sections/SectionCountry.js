@@ -388,14 +388,7 @@ componentDidMount() {
         <br />
         <div className="container countries-container">
           <div className="jumbotron">
-<<<<<<< HEAD
-            <div className="h5">Top 20 Countries with the most gold medals in Olympics history
-              <div className="header-lg"><strong>Country</strong></div>
-              <div className="header"><strong>Number of Gold Medals</strong></div>
-            </div>
-=======
             <div className="h5">Top 20 Countries with the most gold medals in Olympics history</div>
->>>>>>> 98465405a774486f19ab8591df2ac4f4cf1449c7
             <div className="countries-container">
               {this.state.countries}
             </div>
