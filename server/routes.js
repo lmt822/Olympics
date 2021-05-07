@@ -268,7 +268,7 @@ const getUnderdeveloped = (req, res) => {
 const getParticipationRatio = (req, res) => {
   const query = `
         With Participation AS(
-        	SELECT NOC, Olympic_ID, COUNT(DISTINCT(ID)) AS Participants
+        	SELECT NOC, Olympic_ID, COUNT(ID) AS Participants
         	FROM Athlete a 
         	JOIN Participates p ON a.ID = p.Athlete_ID
         	WHERE NOC <> 'ERR'
@@ -300,7 +300,7 @@ const getParticipationRatio = (req, res) => {
 const getAverageMedalsPerAthlete = (req, res) => {
   const query = `
         With Participation AS(
-          SELECT Country, NOC, Olympic_ID, COUNT(DISTINCT(ID)) AS Participants
+          SELECT Country, NOC, Olympic_ID, COUNT(ID) AS Participants
           FROM Athlete a 
           JOIN Participates p ON a.ID = p.Athlete_ID
           WHERE NOC <> 'ERR'
@@ -320,7 +320,7 @@ const getAverageMedalsPerAthlete = (req, res) => {
           FROM medals
           GROUP BY NOC, Olympic_ID),
         avgMedalcounts AS(
-          SELECT NOC, ROUND(SUM(Medals)/COUNT(DISTINCT(Olympic_ID)),0) AS Average_Medals
+          SELECT NOC, ROUND(SUM(Medals)/COUNT(Olympic_ID),0) AS Average_Medals
           FROM medalcounts
           GROUP BY NOC),
         agg AS(
