@@ -15,24 +15,27 @@ console.log('Connected to rds');
 /* -------------------------------------------------- */
 
 
-/* ---- Query 1, top 20 Athletes ---- */
+/* ---- Query 1, top 20 Athletes by number of gold medals ---- */
 const getTop20Athletes = (req, res) => {
   console.log('Top 20 performing atheletes:');
   const query = `
-    WITH winners AS(
-      SELECT Athlete_ID 
-      FROM Participates 
-      WHERE medal = 'Gold'),
-      top AS(
-      SELECT a.ID, COUNT(*)  
-      FROM Athlete a JOIN winners w
-      ON a.ID = w.Athlete_ID
-      GROUP BY a.ID
-      ORDER BY COUNT(*) DESC
-      LIMIT 20)
-    SELECT a.Name 
-    FROM Athlete a
-    JOIN top t ON a.ID = t.ID;
+        WITH winners AS(
+          SELECT Athlete_ID 
+          FROM Participates 
+          WHERE medal = "Gold"),
+        temp AS(
+          SELECT a.ID, a.Name
+          FROM Athlete a),
+        top AS(
+          SELECT t.ID, COUNT(*)  
+          FROM temp t JOIN winners w
+          ON t.ID = w.Athlete_ID
+          GROUP BY t.ID 
+          ORDER BY COUNT(*) DESC
+          LIMIT 20)
+        SELECT a.Name 
+        FROM temp a
+        JOIN top t ON a.ID = t.ID
   `;
   connection.query(query, (err, rows, fields) => {
     if (err) console.log(err);
@@ -44,63 +47,28 @@ const getTop20Athletes = (req, res) => {
   });
 };
 
-
-/* ---- Query 2 top 20 countries ---- */
-const getTop20Countries = (req, res) => {
-  console.log('Top 20 performing countries:');
-  const query = `
-      WITH winners AS(
-      SELECT Athlete_ID, Olympic_ID, Event_ID 
-      FROM Participates 
-      WHERE medal = "Gold"),
-      topcountry AS
-      (SELECT * 
-      FROM Athlete a JOIN winners w
-      ON a.ID = w.Athlete_ID
-      WHERE NOC <> "ERR"
-      GROUP BY NOC, Olympic_ID, Event_ID),
-      medal AS (
-      SELECT NOC, COUNT(*) AS medals
-      FROM topcountry t
-      GROUP BY NOC
-      ORDER BY COUNT(*) DESC
-      LIMIT 20)
-      SELECT c.Country_name, m.medals
-      FROM medal m
-      JOIN Country c
-      ON m.NOC = c.NOC
-  `;
-  connection.query(query, (err, rows, fields) => {
-    if (err) console.log(err);
-    else {
-        console.log(rows);
-        res.json(rows);
-    }
-    ;
-  });
-};
 
 /* ---- Query 1', top 20 Athletes by input sport ---- */
 const getTop20AthletesBySport = (req, res) => {
   var sportName = req.params.sportName;
   const query = `
-      WITH sport AS(
-      SELECT Olympic_ID, Event_ID
-      FROM Game_Event
-      WHERE sport = "` + sportName `"), 
-      winners AS(
-      SELECT Athlete_ID
-      FROM Participates p
-      JOIN sport d
-      ON d.Olympic_ID = p.Olympic_ID AND d.Event_ID = p.Event_ID 
-      WHERE medal = "Gold"
-      GROUP BY Athlete_ID
-      ORDER BY COUNT(*) DESC
-      LIMIT 20)
-      SELECT a.Name 
-      FROM winners w
-      JOIN Athlete a
-      ON a.ID = w.Athlete_ID
+        WITH sport AS(
+          SELECT Olympic_ID, Event_ID
+          FROM Game_Event
+          WHERE sport = "` + sportName + `"), 
+        winners AS(
+          SELECT Athlete_ID, COUNT(*) as gold
+          FROM Participates p
+          JOIN sport d
+          ON d.Olympic_ID = p.Olympic_ID AND d.Event_ID = p.Event_ID 
+          WHERE medal = "Gold"
+          GROUP BY Athlete_ID
+          ORDER BY COUNT(*) DESC
+          LIMIT 10)
+        SELECT a.Name, w.gold  
+        FROM winners w
+        JOIN Athlete a
+        ON a.ID = w.Athlete_ID
   `;
   connection.query(query, (err, rows, fields) => {
     if (err) console.log(err);
@@ -112,23 +80,59 @@ const getTop20AthletesBySport = (req, res) => {
   });
 };
 
-/* ---- Query 3 name of top 20 sports given input country ---- */
+/* ---- Query 2 top 20 countries by number of gold medals---- */
+const getTop20Countries = (req, res) => {
+  console.log('Top 20 performing countries:');
+  const query = `
+        WITH winners AS(
+          SELECT Athlete_ID, Olympic_ID, Event_ID 
+          FROM Participates 
+          WHERE medal = "Gold"),
+        topcountry AS
+          (SELECT NOC 
+          FROM Athlete a JOIN winners w
+          ON a.ID = w.Athlete_ID
+          WHERE NOC <> "ERR"
+          GROUP BY NOC, Olympic_ID, Event_ID),
+        medal AS (
+          SELECT NOC, COUNT(*) AS medals
+          FROM topcountry t
+          GROUP BY NOC
+          ORDER BY COUNT(*) DESC
+          LIMIT 20)
+        SELECT c.Country_name, m.medals
+        FROM medal m
+        JOIN (SELECT Country_name, NOC FROM Country) AS c
+        ON m.NOC = c.NOC
+  `;
+  connection.query(query, (err, rows, fields) => {
+    if (err) console.log(err);
+    else {
+        console.log(rows);
+        res.json(rows);
+    }
+    ;
+  });
+};
+
+
+/* ---- Query 3 name of top 10 sports given input country ---- */
 const getTop20SportsGivenCountry = (req, res) => {
   var countryName = req.params.countryName;
   const query = `
-      WITH winners AS(
-      SELECT Athlete_ID, Olympic_ID, Event_ID 
-      FROM Participates p
-      JOIN Athlete a ON a.ID = p.Athlete_ID 
-      WHERE medal = "Gold" AND a.Country = "` + countryName + `"
-      GROUP BY a.NOC, p.Olympic_ID, p.Event_ID)
-      SELECT ge.Sport AS sports, COUNT(*) AS medals
-      FROM winners w
-      JOIN Game_Event ge 
-      ON w.Olympic_ID = ge.Olympic_ID AND w.Event_ID = ge.Event_ID 
-      GROUP BY Sport 
-      ORDER BY COUNT(*) DESC 
-      LIMIT 20
+        WITH winners AS(
+          SELECT Athlete_ID, Olympic_ID, Event_ID 
+          FROM Participates p
+          JOIN Athlete a ON a.ID = p.Athlete_ID 
+          WHERE medal = "Gold" AND a.Country = "` + countryName + `"
+          GROUP BY a.NOC, p.Olympic_ID, p.Event_ID)
+        SELECT ge.Sport AS sports, COUNT(*) AS medals
+        FROM winners w
+        JOIN Game_Event ge 
+        ON w.Olympic_ID = ge.Olympic_ID AND w.Event_ID = ge.Event_ID 
+        GROUP BY Sport 
+        ORDER BY COUNT(*) DESC 
+        LIMIT 10
   `;
   
   connection.query(query, (err, rows, fields) => {
@@ -139,6 +143,7 @@ const getTop20SportsGivenCountry = (req, res) => {
     }  });
 };
 
+
 /* ---- Query 4 Distribution of medals based on countries in an input sport in an input decade with input medal type
   ---- */
 const getMedalsGivenSportandDecade = (req, res) => {
@@ -146,32 +151,30 @@ const getMedalsGivenSportandDecade = (req, res) => {
   var sport = req.params.sport;
   var medalType =req.params.medalType
   const query = `
-      WITH sport AS(
-      SELECT Olympic_ID, Event_ID
-      FROM Game_Event
-      WHERE sport = "` + sport + `"), 
-      decade AS(
-      SELECT s.Olympic_ID, s.Event_ID, og.Year
-      FROM Olympic_Game og JOIN sport s
-      ON s.Olympic_ID = og.Olympic_ID 
-      WHERE FLOOR(Year/10)*10 = ` + decade + `),
-      winners AS(
-      SELECT Athlete_ID, d.Year
-      FROM Participates p
-      JOIN Athlete a ON a.ID = p.Athlete_ID
-      JOIN decade d
-      ON d.Olympic_ID = p.Olympic_ID AND d.Event_ID = p.Event_ID 
-      WHERE medal =  "` + medalType + `"
-      GROUP BY a.NOC, p.Event_ID, p.Olympic_ID
-      )
-      SELECT a.Country AS country, COUNT(*) AS medals 
-      FROM winners w
-      JOIN Athlete a
-      ON a.ID = w.Athlete_ID
-      GROUP BY a.Country
-      ORDER BY COUNT(*) DESC 
-      LIMIT 20
-; 
+        WITH sport AS(
+          SELECT Olympic_ID, Event_ID
+          FROM Game_Event
+          WHERE sport = "` + sport + `"), 
+        decade AS(
+          SELECT s.Olympic_ID, s.Event_ID, og.Year
+          FROM Olympic_Game og JOIN sport s
+          ON s.Olympic_ID = og.Olympic_ID 
+          WHERE FLOOR(Year/10)*10 = ` + decade + `),
+        winners AS(
+          SELECT Athlete_ID, d.Year
+          FROM Participates p
+          JOIN Athlete a ON a.ID = p.Athlete_ID
+          JOIN decade d
+          ON d.Olympic_ID = p.Olympic_ID AND d.Event_ID = p.Event_ID 
+          WHERE medal =  "` + medalType + `"
+          GROUP BY a.NOC, p.Event_ID, p.Olympic_ID)
+        SELECT a.Country AS country, COUNT(*) AS medals 
+        FROM winners w
+        JOIN Athlete a
+        ON a.ID = w.Athlete_ID
+        GROUP BY a.Country
+        ORDER BY COUNT(*) DESC 
+        LIMIT 10
   `;
 
   connection.query(query, (err, rows, fields) => {
@@ -182,6 +185,7 @@ const getMedalsGivenSportandDecade = (req, res) => {
     }
   });
 };
+
 
 /* ---- Query 5 Olympic performance (number of gold medals) of developed countries ---- */
 const getDeveloped = (req, res) => {
@@ -192,7 +196,7 @@ const getDeveloped = (req, res) => {
         	WHERE GDP*1000/Population >= 12000
         	AND NOC <> 'ERR'),
         useful AS(
-        	SELECT Country, NOC, Olympic_ID, Event_ID, Medal
+        	SELECT Country, NOC, Olympic_ID, Event_ID
         	FROM Athlete a 
         	JOIN Participates p ON a.ID = p.Athlete_ID
         	WHERE NOC <> 'ERR'
@@ -201,13 +205,14 @@ const getDeveloped = (req, res) => {
         		FROM Wealthy)	
         	AND Medal = 'Gold'),
         info AS(
-        	SELECT *
+        	SELECT Country, NOC
         	FROM useful
         	GROUP BY NOC, Olympic_ID, Event_ID)
         SELECT Country, COUNT(*) AS Medals
         FROM info
         GROUP BY NOC
         ORDER BY COUNT(*) DESC
+        LIMIT 15
   `;
   
   connection.query(query, (err, rows, fields) => {
@@ -218,39 +223,35 @@ const getDeveloped = (req, res) => {
     }  });
 };
 
-/* ---- Query 6 Olympic performance (number of gold medals) of underdeveloped countries ---- */
+
+/* ---- Query 6 Olympic performance (total number of medals) of underdeveloped countries ---- */
 const getUnderdeveloped = (req, res) => {
   const query = `
         With poor AS(
-        	SELECT DISTINCT(NOC) AS NOC
-        	From Country
-        	WHERE GDP*1000/Population < 1000
-        	AND NOC <> 'ERR'),
+          SELECT DISTINCT(NOC) AS NOC
+          From Country
+          WHERE GDP*1000/Population < 1000
+          AND NOC <> 'ERR'),
         useful AS(
-        	SELECT Country, NOC, Olympic_ID, Event_ID, Medal
-        	FROM Athlete a
-        	JOIN Participates p ON a.ID = p.Athlete_ID
-        	WHERE NOC <> 'ERR'
-        	AND (Medal = 'Gold' OR Medal = 'Silver' OR Medal = 'Bronze')
-        	AND NOC IN
-        		(SELECT NOC 
-        FROM poor)),
-        info AS(
-        	SELECT *
-        	FROM useful
-        	GROUP BY NOC, Olympic_ID, Event_ID),
+          SELECT Country, NOC, Olympic_ID, Event_ID
+          FROM Athlete a
+          JOIN Participates p ON a.ID = p.Athlete_ID
+          WHERE NOC <> 'ERR'
+          AND (Medal = 'Gold' OR Medal = 'Silver' OR Medal = 'Bronze')
+          AND NOC IN
+            (SELECT NOC 
+            FROM poor)
+          GROUP BY Olympic_ID, Event_ID, NOC),
         withEvents AS(
-        	SELECT i.Country, i.NOC, i.Olympic_ID, i.Event_ID, ge.Sport, i.Medal
-        	FROM info i
-        	JOIN Game_Event ge 
-        ON i.Olympic_ID = ge.Olympic_ID AND i.Event_ID = ge.Event_ID),
-        finall AS(
-        	SELECT Sport, COUNT(*) AS Medals
-        	FROM withEvents
-        	GROUP BY Sport
-        	ORDER BY COUNT(*) DESC)
-        SELECT *
-        FROM finall
+          SELECT ge.Sport
+          FROM useful i
+          JOIN Game_Event ge 
+          ON i.Olympic_ID = ge.Olympic_ID AND i.Event_ID = ge.Event_ID)
+        SELECT Sport, COUNT(*) AS Medals
+        FROM withEvents
+        GROUP BY Sport
+        ORDER BY COUNT(*) DESC
+        LIMIT 10;
   `;
   
   connection.query(query, (err, rows, fields) => {
@@ -260,26 +261,29 @@ const getUnderdeveloped = (req, res) => {
         res.json(rows);
     }  });
 };
+
 
 /* ---- Query 7  Olympic athlete participation ratio ---- */
 const getParticipationRatio = (req, res) => {
   const query = `
         With Participation AS(
-        	SELECT Country, NOC, Olympic_ID, COUNT(DISTINCT(ID)) AS Participants
+        	SELECT NOC, Olympic_ID, COUNT(DISTINCT(ID)) AS Participants
         	FROM Athlete a 
         	JOIN Participates p ON a.ID = p.Athlete_ID
         	WHERE NOC <> 'ERR'
         	GROUP BY NOC, Olympic_ID),
         AVER AS(
-        	SELECT Country, NOC, ROUND(SUM(Participants)/COUNT(Olympic_ID),0) AS Average_Participants
+        	SELECT NOC, ROUND(SUM(Participants)/COUNT(Olympic_ID),0) AS Average_Participants
         	FROM Participation
         	GROUP BY NOC),
         perCapita AS(
-        	SELECT a.Country, a.NOC, Average_Participants, Population
+        	SELECT c.Country_name as Country, a.NOC, Average_Participants, Population
         	FROM AVER a
         	JOIN Country c ON a.NOC = c.NOC)
         SELECT Country, NOC, Average_Participants, Population, ROUND(1000*Population/Average_Participants) AS Athlete_Ratio
         FROM perCapita
+        ORDER BY ROUND(1000*Population/Average_Participants)
+        LIMIT 20
   `;
   
   connection.query(query, (err, rows, fields) => {
@@ -289,6 +293,7 @@ const getParticipationRatio = (req, res) => {
         res.json(rows);
     }  });
 };
+
 
 /* ---- Query 8  Average number of medals per athlete for each country ---- */
 const getAverageMedalsPerAthlete = (req, res) => {
@@ -304,17 +309,17 @@ const getAverageMedalsPerAthlete = (req, res) => {
           FROM Participation
           GROUP BY NOC),
         medals AS(
-          SELECT Country, NOC, Olympic_ID, Medal
+          SELECT NOC, Olympic_ID, Medal
           FROM Athlete a 
           JOIN Participates p ON a.ID = p.Athlete_ID
           WHERE NOC <> 'ERR'
           AND (Medal = 'Gold' OR Medal = 'Silver' OR Medal = 'Bronze')),
         medalcounts AS(
-          SELECT Country, NOC, Olympic_ID, COUNT(*) AS Medals
+          SELECT NOC, Olympic_ID, COUNT(*) AS Medals
           FROM medals
           GROUP BY NOC, Olympic_ID),
         avgMedalcounts AS(
-          SELECT Country, NOC, ROUND(SUM(Medals)/COUNT(DISTINCT(Olympic_ID)),0) AS Average_Medals
+          SELECT NOC, ROUND(SUM(Medals)/COUNT(DISTINCT(Olympic_ID)),0) AS Average_Medals
           FROM medalcounts
           GROUP BY NOC),
         agg AS(
@@ -324,6 +329,7 @@ const getAverageMedalsPerAthlete = (req, res) => {
         SELECT Country, NOC, ROUND(Average_Medals/Average_Participants, 2) AS Medal_Per_Athlete
         FROM agg
         ORDER BY ROUND(Average_Medals/Average_Participants, 2) DESC
+        LIMIT 20
   `;
   
   connection.query(query, (err, rows, fields) => {
@@ -334,7 +340,7 @@ const getAverageMedalsPerAthlete = (req, res) => {
     }  });
 };
 
-/* ---- Query 9  Average age of gold medal winners of a given sport in a given decade ---- */
+/* ---- Query 9  Average age of medal winners of a given sport in a given decade ---- */
 const getAverageAge = (req, res) => {
   var decade = req.params.decade;
   var sport = req.params.sport;
@@ -354,8 +360,8 @@ const getAverageAge = (req, res) => {
           FROM Participates p
           JOIN decade d
           ON d.Olympic_ID = p.Olympic_ID AND d.Event_ID = p.Event_ID 
-          WHERE medal = "Gold")
-        SELECT AVG(w.Year - a.BirthYear) AS average_age
+          WHERE (medal = "Gold" OR medal = "Silver" OR medal = "Bronze"))
+        SELECT ROUND(AVG(w.Year - a.BirthYear),2) AS average_age
         FROM winners w
         JOIN Athlete a
         ON a.ID = w.Athlete_ID 
@@ -369,7 +375,7 @@ const getAverageAge = (req, res) => {
     }  });
 };
 
-/* ---- Query 10  Average height and weight of winners of a given sport in different decades ---- */
+/* ---- Query 10  Average height and weight of medal winners of a given sport in different decades ---- */
 const getHeightandWeight = (req, res) => {
   var sport = req.params.sport;
   const query = `
@@ -386,8 +392,8 @@ const getHeightandWeight = (req, res) => {
           FROM Participates p
           JOIN decade d
           ON d.Olympic_ID = p.Olympic_ID AND d.Event_ID = p.Event_ID 
-          WHERE medal = "Gold")
-        SELECT AVG(a.Height) AS height, AVG(a.Weight) AS weight, decade_year
+          WHERE (medal = 'Gold' OR medal = 'Silver' OR medal = 'Bronze'))
+        SELECT ROUND(AVG(a.Height),2) AS height, ROUND(AVG(a.Weight),2) AS weight, decade_year
         FROM winners w
         JOIN Athlete a
         ON a.ID = w.Athlete_ID
@@ -399,27 +405,29 @@ const getHeightandWeight = (req, res) => {
   });
 };
 
+
+/* ---- Query 11  (similar to query 2): The names and number of gold medals won for each country ---- */
 const getMedals = (req, res) => {
   const query = `
-   WITH winners AS(
-    SELECT Athlete_ID, Olympic_ID, Event_ID 
-    FROM Participates 
-    WHERE medal = "Gold"),
-    topcountry AS
-    (SELECT * 
-    FROM Athlete a JOIN winners w
-    ON a.ID = w.Athlete_ID
-    WHERE NOC <> "ERR"
-    GROUP BY NOC, Olympic_ID, Event_ID),
-    medal AS (
-    SELECT NOC, COUNT(*) AS medals
-    FROM topcountry t
-    GROUP BY NOC
-    ORDER BY COUNT(*) DESC)
-    SELECT c.Country_name as name, m.medals as gold
-    FROM medal m
-    JOIN Country c
-    ON m.NOC = c.NOC 
+        WITH winners AS(
+          SELECT Athlete_ID, Olympic_ID, Event_ID 
+          FROM Participates 
+          WHERE medal = "Gold"),
+        topcountry AS
+          (SELECT * 
+          FROM Athlete a JOIN winners w
+          ON a.ID = w.Athlete_ID
+          WHERE NOC <> "ERR"
+          GROUP BY NOC, Olympic_ID, Event_ID),
+        medal AS (
+          SELECT NOC, COUNT(*) AS medals
+          FROM topcountry t
+          GROUP BY NOC
+          ORDER BY COUNT(*) DESC)
+        SELECT c.Country_name as name, m.medals as gold
+        FROM medal m
+        JOIN Country c
+        ON m.NOC = c.NOC 
   `;
 
   connection.query(query, (err, rows, fields) => {
@@ -429,11 +437,12 @@ const getMedals = (req, res) => {
 };
 
 
+/* ---- Query 12: Get the list of all country names ---- */
 const getCountries = (req, res) => {
   const query = `
-    SELECT Country_name
-    FROM Country
-    ORDER BY Country_name
+        SELECT DISTINCT Country AS Country_name
+        FROM Athlete
+        ORDER BY Country_name
   `;
 
   connection.query(query, (err, rows, fields) => {
@@ -443,11 +452,12 @@ const getCountries = (req, res) => {
 };
 
 
+/* ---- Query 13: Get the list of all decades ---- */
 const getDecades = (req, res) => {
   const query = `
-    SELECT distinct FLOOR(Year/10)*10 as decade
-    FROM Olympic_Game
-    ORDER BY decade;
+        SELECT distinct FLOOR(Year/10)*10 as decade
+        FROM Olympic_Game
+        ORDER BY decade;
   `;
 
   connection.query(query, (err, rows, fields) => {
@@ -457,11 +467,12 @@ const getDecades = (req, res) => {
 };
 
 
+/* ---- Query 14: Get the list of all sports ---- */
 const getSports = (req, res) => {
   const query = `
-    SELECT distinct Sport as sport
-    FROM Game_Event
-    ORDER BY sport;
+        SELECT distinct Sport as sport
+        FROM Game_Event
+        ORDER BY sport;
   `;
 
   connection.query(query, (err, rows, fields) => {
@@ -471,11 +482,12 @@ const getSports = (req, res) => {
 };
 
 
+/* ---- Query 15: Get the list of all medals ---- */
 const getMedalTypes = (req, res) => {
   const query = `
-    SELECT distinct Medal as medalType
-    FROM Participates
-    Where Medal <> "";
+        SELECT distinct Medal as medalType
+        FROM Participates
+        Where Medal <> "";
   `;
 
   connection.query(query, (err, rows, fields) => {

@@ -31,9 +31,19 @@ import { Container,
 
 const items = [
   {
-    src: require("assets/img/participationheader.jpg").default,
+    src: require("assets/img/soroush-karimi.jpg").default,
     altText: "Somewhere",
-    caption: ""
+    caption: "",
+  },
+  {
+    src: require("assets/img/federico-beccari.jpg").default,
+    altText: "Somewhere else",
+    caption: "Somewhere else",
+  },
+  {
+    src: require("assets/img/joshua-stannard.jpg").default,
+    altText: "Here it is",
+    caption: "Here it is",
   },
 ];
 
@@ -89,12 +99,37 @@ function CountryHeader() {
                         <img src={item.src} alt={item.altText} />
                         <CarouselCaption
                           captionText={item.caption}
-                          captionHeader="Top 20 Countries by Olympic Athlete Participation Ratio(population/number of athletes)"
+                          captionHeader="Hello"
                         />
                       </CarouselItem>
                     );
                   })}
-
+                  <a
+                    className="left carousel-control carousel-control-prev"
+                    data-slide="prev"
+                    href="#pablo"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      previous();
+                    }}
+                    role="button"
+                  >
+                    <span className="fa fa-angle-left" />
+                    <span className="sr-only">Previous</span>
+                  </a>
+                  <a
+                    className="right carousel-control carousel-control-next"
+                    data-slide="next"
+                    href="#pablo"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      next();
+                    }}
+                    role="button"
+                  >
+                    <span className="fa fa-angle-right" />
+                    <span className="sr-only">Next</span>
+                  </a>
                 </Carousel>
               </Card>
             </Col>

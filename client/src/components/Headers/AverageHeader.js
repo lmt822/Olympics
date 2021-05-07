@@ -89,7 +89,7 @@ function CountryHeader() {
                         <img src={item.src} alt={item.altText} />
                         <CarouselCaption
                           captionText={item.caption}
-                          captionHeader="Average Number of Medals per Athlete"
+                          captionHeader="Top 20 Countries with the Highest Average Number of Medals per Athlete"
                         />
                       </CarouselItem>
                     );

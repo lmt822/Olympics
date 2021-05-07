@@ -120,7 +120,7 @@ componentDidMount() {
 			console.log(err);
 		}).then(ageList => {
             console.log(ageList);
-			let ageDivs = ageList.map((age, i) => 
+		  let ageDivs = ageList.map((age, i) => 
             <AgeRow 
                 average_age = {age.average_age} 
             /> 
@@ -143,7 +143,7 @@ componentDidMount() {
 
         <div className="container age-container">
             <div className="jumbotron">
-                <div className="h5">Average Age of Gold Medal Winners</div>
+                <div className="h5">Average Age of Medal Winners</div>
                 <div className="dropdown-container">
                     <select value={this.state.selectedDecade} onChange={this.handleDecadeChange} className="dropdown" id="decadeDropdown">
                         {this.state.decade_options}

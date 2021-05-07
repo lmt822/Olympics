@@ -32,6 +32,7 @@ import ProfilePage from "views/examples/ProfilePage.js";
 import RegisterPage from "views/examples/RegisterPage.js";
 import MapPage from "views/examples/MapPage.js";
 import CountryPage from "views/index-sections/SectionCountry.js";
+import SportPage from "views/index-sections/SectionSport.js";
 import AgePage from "views/index-sections/SectionAge.js";
 import StatsPage from "views/index-sections/SectionStats.js";
 import DistributionPage from "views/index-sections/SectionDistribution.js";
@@ -64,6 +65,10 @@ ReactDOM.render(
       <Route
         path="/country"
         render={(props) => <CountryPage {...props} />}
+      />
+      <Route
+        path="/sport"
+        render={(props) => <SportPage {...props} />}
       />
       <Route
         path="/map"

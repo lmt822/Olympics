@@ -141,8 +141,8 @@ componentDidMount() {
             <div className="jumbotron">
               <div className="sports-container">
                 <div className="sport">
-                  <div className="header"><strong>Height</strong></div>
-                  <div className="header"><strong>Weight</strong></div>
+                  <div className="header"><strong>Height (cm)</strong></div>
+                  <div className="header"><strong>Weight (kg)</strong></div>
                   <div className="header"><strong>Decade</strong></div>
                 </div>
                 <div className="sports-container" id="results">

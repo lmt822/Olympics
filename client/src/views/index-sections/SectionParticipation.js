@@ -91,7 +91,7 @@ render() {
               <div className="sports-container">
                 <div className="sport">
                   <div className="header-lg"><strong>Country</strong></div>
-                  <div className="header"><strong>Population in Thousands</strong></div>
+                  <div className="header"><strong>Population (in Thousands)</strong></div>
                   <div className="header"><strong>Number of Participants</strong></div>
                   <div className="header"><strong>Participation Ratio</strong></div>
                 </div>
