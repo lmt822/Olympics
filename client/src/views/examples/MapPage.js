@@ -371,7 +371,7 @@ componentDidMount() {
                 </Row>
             </div>
 
-            <WorldMap color="red" title="" value-suffix="people" size="xxl" data={this.state.medals} />
+            <WorldMap color="red" title="" valuePrefix=":" size="xxl" data={this.state.medals} />
         </>
         );
     };

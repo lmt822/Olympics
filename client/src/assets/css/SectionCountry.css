@@ -6,10 +6,17 @@
     /* border-bottom: 1px solid #ddd; */
   }
   
-.sports-container .sports-header, .sport {
+.sports-container .sports-header, .sport{
+    column-count: 5;
+    column-fill: balance;
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: row wrap;
     align-items: center;
-    height: 40px;
-    column-gap: 80px;
+    height: 60px;
+    column-gap: 500px;
+    columns: 6rem auto;
+    flex: 1 0 auto;
+}
+.sport .medals, .sport .sports{
+    flex: 1 0 auto;
 }
