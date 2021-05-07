@@ -50,9 +50,9 @@ function ProfilePage() {
 
   document.documentElement.classList.remove("nav-open");
   React.useEffect(() => {
-    document.body.classList.add("landing-page");
+    document.body.classList.add("about");
     return function cleanup() {
-      document.body.classList.remove("landing-page");
+      document.body.classList.remove("about");
     };
   });
   return (
