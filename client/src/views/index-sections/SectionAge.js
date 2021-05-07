@@ -119,12 +119,17 @@ componentDidMount() {
 		}, err => {
 			console.log(err);
 		}).then(ageList => {
-            console.log(ageList);
 		  let ageDivs = ageList.map((age, i) => 
             <AgeRow 
                 average_age = {age.average_age} 
             /> 
-			);		
+			);
+      
+      console.log(ageDivs[0].props.average_age);
+      if(ageDivs[0].props.average_age === null){
+        ageDivs = "Not Available"
+      }		
+      
 			this.setState({
 				age: ageDivs
 				});

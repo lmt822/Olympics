@@ -101,7 +101,19 @@ componentDidMount() {
 		}, err => {
 			console.log(err);
 		}).then(statsList => {
-            console.log(statsList);
+
+      Object.keys(statsList).forEach(function(key) {
+        if(statsList[key].decade_year === null){
+          statsList[key].decade_year = "Not Available";
+        }
+        if(statsList[key].height === null){
+          statsList[key].height = "Not Available";
+        }
+        if(statsList[key].weight === null){
+          statsList[key].weight = "Not Available";
+        }
+      })
+
 			let statsDivs = statsList.map((stat, i) => 
             <StatsRow 
                 height = {stat.height}

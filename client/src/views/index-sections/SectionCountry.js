@@ -112,12 +112,17 @@ componentDidMount() {
 		}, err => {
 			console.log(err);
 		}).then(sportsList => {
+
 			let sportDivs = sportsList.map((sport, i) => 
         <SportRow 
           sports = {sport.sports} 
           medals = {sport.medals}
         /> 
 			);		
+
+      if(sportDivs.length == 0){
+        sportDivs = "Not Available"
+      }
 			this.setState({
 				sports: sportDivs
 				});
