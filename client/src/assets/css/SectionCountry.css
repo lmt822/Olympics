@@ -13,7 +13,7 @@
     flex-flow: row wrap;
     align-items: center;
     height: 60px;
-    column-gap: 500px;
+    column-gap: 800px;
     columns: 6rem auto;
     flex: 1 0 auto;
 }

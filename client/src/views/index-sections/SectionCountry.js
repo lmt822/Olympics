@@ -24,6 +24,8 @@ import SportRow from '../../components/SportRow';
 import SportRow1 from '../../components/SportRow1';
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import CountryHeader from "components/Headers/CountryHeader.js"
+import DemoFooter from "components/Footers/DemoFooter.js";
+
 
 // reactstrap components
 import {
@@ -137,16 +139,16 @@ componentDidMount() {
       <>
       <IndexNavbar />
       <CountryHeader />
-      <div className="section section-buttons">
-
         <br />
-        <div className="container countries-container">
-          <div className = 'jumbotron'>
-            <h5>Popular Countries with Brief Description</h5>
+        <div className="container" style={{backgroundColor: "white"}}>
+            <h2>Popular Countries with Brief Description</h2>
             <Button
             // className="btn-round mr-1"
-            color="default"
+            color="danger"
             id="tooltip392938669"
+            className="btn-round mr-1"
+            href="https://www.google.com/search?q=UNITED STATES OF AMERICA"
+            target="_blank"
             outline
             >
               UNITED STATES OF AMERICA
@@ -170,8 +172,11 @@ componentDidMount() {
 
             <Button
               // className="btn-round mr-1"
-              color="default"
+              color="primary"
               id="tooltip392938670"
+              className="btn-round mr-1" 
+              href="https://www.google.com/search?q=CHINA"
+              target="_blank"
               outline
             >
               CHINA
@@ -192,8 +197,11 @@ componentDidMount() {
 
             <Button
               // className="btn-round mr-1"
-              color="default"
+              color="info"
               id="tooltip392938671"
+              className="btn-round mr-1" 
+              href="https://www.google.com/search?q=UK"
+              target="_blank"
               outline
             >
               UNITED KINGDOM
@@ -216,8 +224,11 @@ componentDidMount() {
 
             <Button
               // className="btn-round mr-1"
-              color="default"
+              color="warning"
+              className="btn-round mr-1" 
               id="tooltip392938672"
+              href="https://www.google.com/search?q=France"
+              target="_blank"
               outline
             >
               FRANCE
@@ -241,8 +252,11 @@ componentDidMount() {
 
             <Button
               // className="btn-round mr-1"
-              color="default"
+              color="danger"
               id="tooltip392938673"
+              className="btn-round mr-1" 
+              href="https://www.google.com/search?q=Canada"
+              target="_blank"
               outline
             >
               CANADA
@@ -266,8 +280,11 @@ componentDidMount() {
 
             <Button
               // className="btn-round mr-1"
-              color="default"
+              color="primary"
               id="tooltip392938674"
+              className="btn-round mr-1" 
+              href="https://www.google.com/search?q=Russia"
+              target="_blank"
               outline
             >
               RUSSIA
@@ -291,8 +308,11 @@ componentDidMount() {
 
             <Button
               // className="btn-round mr-1"
-              color="default"
+              color="info"
               id="tooltip392938675"
+              className="btn-round mr-1" 
+              href="https://www.google.com/search?q=spain"
+              target="_blank"
               outline
             >
               SPAIN
@@ -315,8 +335,11 @@ componentDidMount() {
 
             <Button
               // className="btn-round mr-1"
-              color="default"
+              color="success"
               id="tooltip392938676"
+              className="btn-round mr-1" 
+              href="https://www.google.com/search?q=japan"
+              target="_blank"
               outline
             >
               JAPAN
@@ -338,8 +361,11 @@ componentDidMount() {
 
             <Button
               // className="btn-round mr-1"
-              color="default"
+              color="danger"
               id="tooltip392938677"
+              className="btn-round mr-1" 
+              href="https://www.google.com/search?q=italy"
+              target="_blank"
               outline
             >
               ITALY
@@ -362,8 +388,11 @@ componentDidMount() {
 
             <Button
               // className="btn-round mr-1"
-              color="default"
+              color="info"
               id="tooltip392938678"
+              className="btn-round mr-1" 
+              href="https://www.google.com/search?q=germany"
+              target="_blank"
               outline
             >
               GERMANY
@@ -385,52 +414,46 @@ componentDidMount() {
               and its financial centre is Frankfurt; the largest urban area is the Ruhr.
             </UncontrolledTooltip>
 
-
-          </div> 
-        </div>
           
 
         <br />
-        <div className="container countries-container">
-          <div className="jumbotron">
-            <div className="h5">Top 20 Countries with the most gold medals in Olympics history</div>
-            <div className="countries-container">
+        <div className="container" style={{backgroundColor: "White"}}>
+            <h2>Top 20 Countries with the most gold medals in Olympics history</h2>
+            <div className="countries-container" style={{backgroundColor: "White"}}>
+              <div className="sport">
+                  <div className="h3"><strong>Country</strong></div>
+                  <div className="h3" style={{'text-align': 'left'}}><strong>Number of Gold Medals</strong></div>
+              </div>
               {this.state.countries}
-            </div>
           </div>
 
           <br />
-          <div className="container countries-container">
-            <div className="jumbotron">
-              <div className="h5">Individual Country Olympic Performance</div>
-              <div className="dropdown-container">
+          <div className="container" style={{backgroundColor: "White"}}>
+              <div className="h2">Individual Country Olympic Performance</div>
+              <div className="UncontrolledDropdown">
                 <select value={this.state.selectedCountry} onChange={this.handleCountryChange} className="dropdown" id="countriesDropdown">
                   {this.state.country_options}
                 </select>
-                <button className="submit-btn" id="submitBtn" onClick={this.submitCountry}>Submit</button>
-              </div>
+                <Button color='info'className="btn-round mr-1" type="button" onClick={this.submitCountry}>Submit</Button>
             </div>
-
+          </div>
             <br />
-            <container>
-            <div className="jumbotron">
-              <div className="sports-container">
+              <div className="container" style={{backgroundColor: "White"}}>
+                <div className="countries-container" style={{backgroundColor: "White"}}>
                 <div className="sport">
-                  <div className="header-lg"><strong>Sport</strong></div>
-                  <div className="header"><strong>Number of Gold Medals</strong></div>
+                  <div className="h3"><strong>Sport</strong></div>
+                  <div className="h3" style={{'text-align': 'left'}}><strong>Number of Gold Medals</strong></div>
                 </div>
-                <div className="sports-container" id="results">
                   {this.state.sports}
-                </div>
               </div>
-            </div>
-            </container>
+              </div>
 			  </div>
-
+        <br />
 
         </div>
-      </div>     
+        <DemoFooter />
       </>      
+
     );
   };
 };

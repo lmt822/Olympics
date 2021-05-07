@@ -31,19 +31,19 @@ import { Container,
 
 const items = [
   {
-    src: require("assets/img/soroush-karimi.jpg").default,
-    altText: "Somewhere",
-    caption: "",
+    src: require("assets/img/Bird_nest.jpeg").default,
+    altText: "Bird nest",
+    caption: "Beijing National Stadium",
   },
   {
-    src: require("assets/img/federico-beccari.jpg").default,
-    altText: "Somewhere else",
-    caption: "Somewhere else",
+    src: require("assets/img/SoL.jpeg").default,
+    altText: "Statue of Liberty",
+    caption: "Statue of Liberty",
   },
   {
-    src: require("assets/img/joshua-stannard.jpg").default,
-    altText: "Here it is",
-    caption: "Here it is",
+    src: require("assets/img/London.jpeg").default,
+    altText: "London",
+    caption: "London",
   },
 ];
 
@@ -99,7 +99,7 @@ function CountryHeader() {
                         <img src={item.src} alt={item.altText} />
                         <CarouselCaption
                           captionText={item.caption}
-                          captionHeader="Hello"
+                          captionHeader="Olympics"
                         />
                       </CarouselItem>
                     );
