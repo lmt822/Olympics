@@ -31,26 +31,18 @@ function DemoFooter() {
             <ul>
               <li>
                 <a
-                  href="https://www.creative-tim.com?ref=pkr-footer"
+                  href="https://www.seas.upenn.edu/~cis550/"
                   target="_blank"
                 >
-                  Creative Tim
+                  A CIS550 project 
                 </a>
               </li>
               <li>
                 <a
-                  href="http://blog.creative-tim.com/?ref=pkr-footer"
+                  href="https://www.upenn.edu"
                   target="_blank"
                 >
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.creative-tim.com/license?ref=pkr-footer"
-                  target="_blank"
-                >
-                  Licenses
+                  University of Pennsylvania
                 </a>
               </li>
             </ul>
@@ -58,7 +50,7 @@ function DemoFooter() {
           <div className="credits ml-auto">
             <span className="copyright">
               © {new Date().getFullYear()}, made with{" "}
-              <i className="fa fa-heart heart" /> by Creative Tim
+              <i className="fa fa-heart heart" /> by 550 Big Brain
             </span>
           </div>
         </Row>

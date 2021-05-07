@@ -15,7 +15,8 @@
     "react-scripts": "4.0.3",
     "react-svg-worldmap": "1.1.0",
     "react-wordcloud": "1.2.7",
-    "reactstrap": "8.9.0"
+    "reactstrap": "8.9.0",
+    "wikijs": "6.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
