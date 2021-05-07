@@ -103,14 +103,14 @@ componentDidMount() {
 		}).then(statsList => {
 
       Object.keys(statsList).forEach(function(key) {
-        if(statsList[0].decade_year === null){
-          statsList[0].decade_year = "Not Available";
+        if(statsList[key].decade_year === null){
+          statsList[key].decade_year = "Not Available";
         }
-        if(statsList[0].height === null){
-          statsList[0].height = "Not Available";
+        if(statsList[key].height === null){
+          statsList[key].height = "Not Available";
         }
-        if(statsList[0].weight === null){
-          statsList[0].weight = "Not Available";
+        if(statsList[key].weight === null){
+          statsList[key].weight = "Not Available";
         }
       })
 
