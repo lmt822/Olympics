@@ -36,3 +36,16 @@
 .stats .height, .stats .weight, .stats .decade_year{
     flex: 1 0 auto;
 }
+
+.participation-container .participation{
+    column-count: 4;
+    column-fill: balance;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    height: 60px;
+    column-gap: 20px;
+}
+.participation .name, .participation .population, .participation .participants, .participation .ratio {
+    flex: 1 0 10px;
+}

@@ -55,7 +55,7 @@ export default class DevVSUnderPage extends React.Component {
       options: {
         legend: {
           show: true,
-          position: 'right'
+          position: 'right',
         },
         chart: {
           height: 1000,

@@ -83,25 +83,18 @@ render() {
       <>
       <IndexNavbar />
       <ParticipationHeader />
-      <div className="section section-buttons">
-
             <br />
-            <container>
-            <div className="jumbotron">
-              <div className="sports-container">
-                <div className="sport">
-                  <div className="header-lg"><strong>Country</strong></div>
-                  <div className="header"><strong>Population (in Thousands)</strong></div>
-                  <div className="header"><strong>Number of Participants</strong></div>
-                  <div className="header"><strong>Participation Ratio</strong></div>
+            <div className='container' style={{backgroundColor: "White"}}>
+              <div className="participation-container">
+                <div className="participation">
+                  <div className="h3"><strong>Country</strong></div>
+                  <div className="h3"><strong>Population (in Thousands)</strong></div>
+                  <div className="h3"><strong>Number of Participants</strong></div>
+                  <div className="h3"><strong>Participation Ratio</strong></div>
                 </div>
-                <div className="sports-container" id="results">
                   {this.state.countries}
                 </div>
               </div>
-            </div>
-            </container>
-        </div>
         <DemoFooter />
       </>
     );

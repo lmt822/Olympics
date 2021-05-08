@@ -7,11 +7,11 @@ export default class ParticipationRow extends React.Component {
 	/* Change the contents (NOT THE STRUCTURE) of the HTML elements to show a sports row. */
 	render() {
 		return (
-			<div className="sport">
-				<div className="name">{this.props.name}</div>
-				<div className="population">{this.props.population}</div>
-				<div className="participants">{this.props.participants}</div>
-				<div className="ratio">{this.props.ratio}</div>
+			<div className="participation">
+				<div className="name" style={{'text-align': 'left'}}>{this.props.name}</div>
+				<div className="population" style={{'text-align': 'left'}}>{this.props.population}</div>
+				<div className="participants" style={{'text-align': 'right'}}>{this.props.participants}</div>
+				<div className="ratio" style={{'text-align': 'right', 'margin-right': '200px'}}>{this.props.ratio}</div>
 			</div>
 		);
 	};
