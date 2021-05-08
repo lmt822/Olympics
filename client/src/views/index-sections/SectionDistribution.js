@@ -23,7 +23,7 @@ import DistributionRow from '../../components/DistributionRow';
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import DistributionHeader from "components/Headers/DistributionHeader.js"
 import DemoFooter from "components/Footers/DemoFooter.js";
-
+import ApexCharts from "react-apexcharts";
 // reactstrap components
 import {
   Button,
@@ -53,7 +53,26 @@ export default class DistributionPage extends React.Component {
         distribution: [],
         selectedDecade: "1890",
         selectedSport: "Aeronautics",
-        selectedMedalType: "Gold"
+        selectedMedalType: "Gold",
+        series:[],
+        options: {
+          chart: {
+            width: 500,
+            type: 'pie',
+          },
+        labels: [],
+        responsive: [{
+          breakpoint: 2000,
+          options: {
+            chart: {
+              width: 500
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+      }
     };
 
     this.submitFilter = this.submitFilter.bind(this);
@@ -137,20 +156,25 @@ componentDidMount() {
 		}, err => {
 			console.log(err);
 		}).then(distributionList => {
-            console.log(distributionList);
-			let distributionDivs = distributionList.map((distribution, i) => 
-            <DistributionRow 
-                country = {distribution.country}
-                medals = {distribution.medals} 
-            /> 
-			);	
-
-      if(distributionDivs.length == 0){
-        distributionDivs = "Not Available"
+            var labels = [];
+            var series = [];
+			for (var i=0;i<distributionList.length;i++) {
+        if (distributionList[i].country === 'no longer exist') {
+          labels.push('Soviet Union');
+        } else {
+          labels.push(distributionList[i].country);
+        }
+        series.push(distributionList[i].medals);
       }
 
+      if(distributionList.length === 0){
+        alert("Not Available");
+      }
+
+      let tmp_options = {...this.state.options, labels:labels};
 			this.setState({
-				distribution: distributionDivs
+				series: series,
+        options: tmp_options
 				});
 			}, err => {
 				console.log(err);
@@ -163,7 +187,7 @@ componentDidMount() {
       <>
       <IndexNavbar />
       <DistributionHeader/>
-        <div className="container"style={{backgroundColor: "White"}}>
+        <div className="container" style={{backgroundColor: "White"}}>
                 <div className="h2">Medal Distribution</div>
                 <div className="dropdown-container">
                     <select value={this.state.selectedDecade} onChange={this.handleDecadeChange} className="dropdown" id="decadeDropdown">
@@ -180,19 +204,9 @@ componentDidMount() {
             </div>
 
             <br />
-            <container>
-            <div className="jumbotron">
-              <div className="sports-container">
-                <div className="sport">
-                  <div className="header-lg"><strong>Country</strong></div>
-                  <div className="header"><strong>Medals</strong></div>
-                </div>
-                <div className="sports-container" id="results">
-                  {this.state.distribution}
-                </div>
+            <div id="chart" style={{'margin-left': '500px', 'margin-right': '500px'}}>
+             <ApexCharts options={this.state.options} series={this.state.series} type="pie" width={380} />
               </div>
-            </div>
-            </container>
  
       <DemoFooter />   
       </>      
