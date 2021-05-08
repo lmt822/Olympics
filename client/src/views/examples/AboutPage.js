@@ -72,7 +72,7 @@ function AboutPage() {
                     <a href="#pablo" onClick={(e) => e.preventDefault()}>
                       <div className="author">
                         <CardTitle tag="h4">Muhua Chen</CardTitle>
-                        <h6 className="card-category">Backend Developer</h6>
+                        <h6 className="card-category">Penn SEAS '22 DATS</h6>
                       </div>
                     </a>
                     <p className="card-description text-center">
@@ -125,7 +125,7 @@ function AboutPage() {
                     <a href="#pablo" onClick={(e) => e.preventDefault()}>
                       <div className="author">
                         <CardTitle tag="h4">Mengtian Li</CardTitle>
-                        <h6 className="card-category">Frontend Developer</h6>
+                        <h6 className="card-category">Penn SEAS '22 DATS</h6>
                       </div>
                     </a>
                     <p className="card-description text-center">
@@ -180,7 +180,7 @@ function AboutPage() {
                     <a href="#pablo" onClick={(e) => e.preventDefault()}>
                       <div className="author">
                         <CardTitle tag="h4">Yanqi Liu</CardTitle>
-                        <h6 className="card-category">Frontend Developer</h6>
+                        <h6 className="card-category">Penn SEAS '22 DATS</h6>
                       </div>
                     </a>
                     <p className="card-description text-center">
@@ -235,7 +235,7 @@ function AboutPage() {
                     <a href="#pablo" onClick={(e) => e.preventDefault()}>
                       <div className="author">
                         <CardTitle tag="h4">Tianxiao Zhang</CardTitle>
-                        <h6 className="card-category">Backend Developer</h6>
+                        <h6 className="card-category"> Penn SEAS '22 DATS</h6>
                       </div>
                     </a>
                     <p className="card-description text-center">
