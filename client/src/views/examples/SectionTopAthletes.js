@@ -37,10 +37,6 @@ const items = [
     altText: "carl lewis",
   },
   {
-    src: require("assets/img/2.jpg").default,
-    altText: "carl lewis",
-  },
-  {
     src: require("assets/img/3.jpeg").default,
     altText: "carl lewis",
   },
