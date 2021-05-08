@@ -24,6 +24,7 @@ import DevVSUnderRow from '../../components/DevVSUnderRow';
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import DevVSUnderHeader from "components/Headers/DevVSUnderHeader.js"
 import DemoFooter from "components/Footers/DemoFooter.js";
+import ApexCharts from "react-apexcharts";
 
 // reactstrap components
 import {
@@ -48,7 +49,22 @@ export default class DevVSUnderPage extends React.Component {
     // The state maintained by this React Component.
     this.state = {
       sport: [],
-      country: []
+      country: [],
+      series1: [],
+      series2: [],
+      options: {
+        legend: {
+          show: true,
+          position: 'right'
+        },
+        chart: {
+          height: 1000,
+          type: 'treemap'
+        },
+        title: {
+          text: ''
+        }
+      }
     };
   };
 
@@ -61,18 +77,14 @@ componentDidMount() {
     })
       .then(res => res.json()) // Convert the response data to a JSON.
       .then(participationList => {
-        console.log(participationList);
-        // Map each attribute of a person in this.state.people to an HTML element
-        let sportDivs = participationList.map((sport, i) => (
-              <DevVSUnderRow
-                  name = {sport.Sport}
-                  medals = {sport.Medals}
-              />
-        ));
-
-        // Set the state of the person list to the value returned by the HTTP response from the server.
+        var data = [];
+        for (var i=0; i<participationList.length;i++) {
+          let tmp = {x:participationList[i].Sport,y:participationList[i].Medals};
+          data.push(tmp);
+        }
+        let tmp_series = [{'data':data}];
         this.setState({
-          sport: sportDivs,
+          series1: tmp_series
         });
       })
       .catch(err => console.log(err)); // Print the error if there is one.
@@ -83,19 +95,16 @@ componentDidMount() {
       })
         .then(res => res.json()) // Convert the response data to a JSON.
         .then(participationList => {
-          console.log(participationList);
-          // Map each attribute of a person in this.state.people to an HTML element
-          let sportDivs = participationList.map((sport, i) => (
-                <DevVSUnderRow
-                    name = {sport.Country}
-                    medals = {sport.Medals}
-                />
-          ));
+         var data = [];
+          for (var i=0; i<participationList.length;i++) {
+            let tmp = {x:participationList[i].Country,y:participationList[i].Medals};
+            data.push(tmp);
+          }
+        let tmp_series = [{'data':data}];
+        this.setState({
+          series2: tmp_series
+        });
 
-          // Set the state of the person list to the value returned by the HTTP response from the server.
-          this.setState({
-            country: sportDivs,
-          });
         })
         .catch(err => console.log(err)); // Print the error if there is one.
 
@@ -111,30 +120,20 @@ render() {
             <div className="container" style={{backgroundColor: "White"}}>
               <div className="sports-container">
               <div className="h2">Olympic Performance of Developed Countries (GDP per capita > 12,000 USD per year) </div>
-                <div className="sport">
-                  <div className="h3"><strong>Country</strong></div>
-                  <div className="h3"><strong>Number of Medals</strong></div>
-                </div>
-                <div className="sports-container" id="results">
-                  {this.state.country}
-                </div>
+                <div id="chart" >
+                  <ApexCharts options={this.state.options} series={this.state.series2} type='treemap' height='300' />
+              </div>
               </div>
             </div>
 
 
             <br />
             <div className="container" style={{backgroundColor: "White"}}>
-              <div className="sports-container">
               <div className="h2"> Sports Underdeveloped Countries Win Most Medals In (GDP per capita lower than 1,000 USD per year) </div>
-                <div className="sport">
-                  <div className="h3"><strong>Sport</strong></div>
-                  <div className="h3"><strong>Number of Medals</strong></div>
-                </div>
-                <div className="sports-container" id="results">
-                  {this.state.sport}
-                </div>
+                <div id="chart" >
+                  <ApexCharts options={this.state.options} series={this.state.series1} type='treemap' height='300' />
               </div>
-            </div>
+              </div>
 
 
 
