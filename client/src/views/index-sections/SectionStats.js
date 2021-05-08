@@ -22,7 +22,7 @@ import StatsRow from '../../components/StatsRow';
 import DemoFooter from "components/Footers/DemoFooter.js";
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import StatsHeader from "components/Headers/StatsHeader.js"
-
+import DemoFooter from "components/Footers/DemoFooter.js";
 // reactstrap components
 import {
   Button,
@@ -135,38 +135,37 @@ componentDidMount() {
       <>
       <IndexNavbar />
       <StatsHeader/>
-      <div className="section section-buttons">
-
-        <div className="container states-container">
-            <div className="jumbotron">
-                <div className="h5">Physical Stats of winners</div>
+        <div className="container" style={{backgroundColor: "White"}}>
+                <div className="h2">Physical Stats of winners</div>
                 <div className="dropdown-container">
                     <select value={this.state.selectedSport} onChange={this.handleSportChange} className="dropdown" id="sportDropdown">
                         {this.state.sport_options}
                     </select>
-                    <button className="submit-btn" id="submitBtn" onClick={this.submitFilter}>Submit</button>
+                    <Button color='info'className="btn-round mr-1" type="button"  onClick={this.submitFilter}>Submit</Button>
                 </div>
             </div>
 
             <br />
-            <container>
-            <div className="jumbotron">
-              <div className="sports-container">
-                <div className="sport">
-                  <div className="header"><strong>Height (cm)</strong></div>
-                  <div className="header"><strong>Weight (kg)</strong></div>
-                  <div className="header"><strong>Decade</strong></div>
+              <div className="stats-container">
+                <div className="stats">
+                  <div className="h7" style={{'text-align': 'left', 'margin-left': '100px'}}><strong>Height (cm)</strong></div>
+                  <div className="h7" style={{'text-align': 'center'}}><strong>Weight (kg)</strong></div>
+                  <div className="h7" style={{'text-align': 'right', 'margin-right': '100px'}}><strong>Decade</strong></div>
                 </div>
                 <div className="sports-container" id="results">
                   {this.state.stats}
                 </div>
               </div>
+<<<<<<< HEAD
             </div>
             </container>
 
         </div>
       </div>  
       <DemoFooter />   
+=======
+     <DemoFooter />
+>>>>>>> e111533f0fd391fbfa04e235e8256a30b9602a99
       </>      
     );
   };
