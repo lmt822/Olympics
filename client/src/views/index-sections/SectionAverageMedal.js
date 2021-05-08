@@ -24,6 +24,7 @@ import AverageRow from '../../components/AverageRow';
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import AverageHeader from "components/Headers/AverageHeader.js"
 import DemoFooter from "components/Footers/DemoFooter.js";
+import ApexCharts from "react-apexcharts";
 
 // reactstrap components
 import {
@@ -47,9 +48,26 @@ export default class AverageMedalPage extends React.Component {
 
     // The state maintained by this React Component.
     this.state = {
-      countries: []
-    };
-  };
+      countries: [],
+      series: [],
+      options: {
+          chart: {
+          type: 'bar',
+          height: 350
+        },
+        plotOptions: {
+          bar: {
+            borderRadius: 4,
+            horizontal: true,
+          }
+        },
+        dataLabels: {
+          enabled: false
+        },
+        xaxis: {}
+    }
+  }
+};
 
 
  // React function that is called when the page load.
@@ -60,23 +78,23 @@ componentDidMount() {
     })
       .then(res => res.json()) // Convert the response data to a JSON.
       .then(participationList => {
-        // Map each attribute of a person in this.state.people to an HTML element
-        let participationDivs = participationList.map((country, i) => (
-              <AverageRow
-                  name = {country.Country}
-                  ratio = {country.Medal_Per_Athlete}
+        var series = [];
+        var labels = [];
 
-              />
-        ));
+        for (var i=0; i < participationList.length; i++) {
+          labels.push(participationList[i].Country);
+          series.push(participationList[i].Medal_Per_Athlete);
+        }
+        let tmp_options = {...this.state.options, xaxis:{'categories':labels}};
+        let tmp_series = [{'name': 'medals per athlete', 'data':series}];
 
-        // Set the state of the person list to the value returned by the HTTP response from the server.
         this.setState({
-          countries: participationDivs,
+          series: tmp_series,
+          options: tmp_options
         });
       })
       .catch(err => console.log(err)); // Print the error if there is one.
-  }
-
+};
 
 render() {
     return (
@@ -85,17 +103,9 @@ render() {
       <AverageHeader />
 
             <br />
-            <div className="container" style={{backgroundColor: "White"}}>
-              <div className="sports-container" style={{backgroundColor: "White"}}>
-                <div className="sport">
-                  <div className="h4"><strong>Country</strong></div>
-                  <div className="h4"><strong>Average Medals per Athelete</strong></div>
-                </div>
-                <div className="sports-container" id="results">
-                  {this.state.countries}
-                </div>
+            <div id="chart" style={{'margin-left': '100px', 'margin-right': '500px'}}>
+             <ApexCharts options={this.state.options} series={this.state.series} type="bar" width="1000"/>
               </div>
-            </div>
       <DemoFooter />
 
       </>
