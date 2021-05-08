@@ -22,7 +22,6 @@ import DemoFooter from "components/Footers/DemoFooter.js";
 import DistributionRow from '../../components/DistributionRow';
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import DistributionHeader from "components/Headers/DistributionHeader.js"
-import DemoFooter from "components/Footers/DemoFooter.js";
 import ApexCharts from "react-apexcharts";
 // reactstrap components
 import {
@@ -207,17 +206,8 @@ componentDidMount() {
             <div id="chart" style={{'margin-left': '500px', 'margin-right': '500px'}}>
              <ApexCharts options={this.state.options} series={this.state.series} type="pie" width={380} />
               </div>
-<<<<<<< HEAD
-            </div>
-            </container>
-
-        </div>
-      </div> 
-      <DemoFooter />    
-=======
  
       <DemoFooter />   
->>>>>>> e111533f0fd391fbfa04e235e8256a30b9602a99
       </>      
     );
   };

@@ -19,7 +19,6 @@
 import React from "react";
 // plugin that creates slider
 import StatsRow from '../../components/StatsRow';
-import DemoFooter from "components/Footers/DemoFooter.js";
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import StatsHeader from "components/Headers/StatsHeader.js"
 import DemoFooter from "components/Footers/DemoFooter.js";
@@ -156,16 +155,7 @@ componentDidMount() {
                   {this.state.stats}
                 </div>
               </div>
-<<<<<<< HEAD
-            </div>
-            </container>
-
-        </div>
-      </div>  
-      <DemoFooter />   
-=======
      <DemoFooter />
->>>>>>> e111533f0fd391fbfa04e235e8256a30b9602a99
       </>      
     );
   };
