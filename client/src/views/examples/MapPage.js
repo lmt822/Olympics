@@ -37,7 +37,6 @@ import {
 
 // core components
 import { WorldMap } from "react-svg-worldmap"
-import LandingPageHeader from "components/Headers/LandingPageHeader.js";
 import DemoFooter from "components/Footers/DemoFooter.js";
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 
@@ -372,6 +371,7 @@ componentDidMount() {
             </div>
 
             <WorldMap color="red" title="" valuePrefix=":" size="xxl" data={this.state.medals} />
+            <DemoFooter />
         </>
         );
     };

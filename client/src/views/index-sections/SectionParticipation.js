@@ -18,8 +18,8 @@
 */
 import React from "react";
 // plugin that creates slider
-import Slider from "nouislider";
 import '../../assets/css/SectionCountry.css';
+import DemoFooter from "components/Footers/DemoFooter.js";
 import ParticipationRow from '../../components/ParticipationRow';
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import ParticipationHeader from "components/Headers/ParticipationHeader.js"
@@ -101,11 +101,8 @@ render() {
               </div>
             </div>
             </container>
-
-
-
-
         </div>
+        <DemoFooter />
       </>
     );
   };

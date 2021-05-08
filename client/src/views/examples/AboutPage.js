@@ -36,7 +36,6 @@ import {
 } from "reactstrap";
 
 // core components
-import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 import DemoFooter from "components/Footers/DemoFooter.js";
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 

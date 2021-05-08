@@ -18,7 +18,7 @@
 */
 import React from "react";
 // plugin that creates slider
-import Slider from "nouislider";
+import DemoFooter from "components/Footers/DemoFooter.js";
 import DistributionRow from '../../components/DistributionRow';
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import DistributionHeader from "components/Headers/DistributionHeader.js"
@@ -197,7 +197,8 @@ componentDidMount() {
             </container>
 
         </div>
-      </div>     
+      </div> 
+      <DemoFooter />    
       </>      
     );
   };

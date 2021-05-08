@@ -26,10 +26,7 @@ import "assets/scss/paper-kit.scss?v=1.3.0";
 import "assets/demo/demo.css?v=1.3.0";
 // pages
 import Index from "views/Index.js";
-import NucleoIcons from "views/NucleoIcons.js";
 import AboutPage from "views/examples/AboutPage.js";
-import ProfilePage from "views/examples/ProfilePage.js";
-import RegisterPage from "views/examples/RegisterPage.js";
 import MapPage from "views/examples/MapPage.js";
 import CountryPage from "views/index-sections/SectionCountry.js";
 import SportPage from "views/index-sections/SectionSport.js";
@@ -46,18 +43,6 @@ ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route path="/index" render={(props) => <Index {...props} />} />
-      <Route
-        path="/nucleo-icons"
-        render={(props) => <NucleoIcons {...props} />}
-      />
-      <Route
-        path="/profile-page"
-        render={(props) => <ProfilePage {...props} />}
-      />
-      <Route
-        path="/register-page"
-        render={(props) => <RegisterPage {...props} />}
-      />
       <Route
         path="/country"
         render={(props) => <CountryPage {...props} />}

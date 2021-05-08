@@ -18,8 +18,8 @@
 */
 import React from "react";
 // plugin that creates slider
-import Slider from "nouislider";
 import StatsRow from '../../components/StatsRow';
+import DemoFooter from "components/Footers/DemoFooter.js";
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import StatsHeader from "components/Headers/StatsHeader.js"
 
@@ -165,7 +165,8 @@ componentDidMount() {
             </container>
 
         </div>
-      </div>     
+      </div>  
+      <DemoFooter />   
       </>      
     );
   };
